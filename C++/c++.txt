@@ -1,0 +1,22 @@
+🚀 C++ (Performance & System-Level Control)
+
+✅ Manual Memory Management 
+    → new/delete, malloc/free for precise control over memory.
+✅ RAII (Resource Acquisition Is Initialization) 
+    → Ensures resources like memory, file handles, and sockets are properly freed.
+✅ Multiple Inheritance     
+    → A class can inherit from multiple parent classes, unlike Java and Rust.
+✅ Templates & Meta-Programming 
+    → Enables compile-time generic programming (template<typename T>).
+✅ Low-Level Access & Pointers 
+    → Full control over system memory (int* ptr = &x;).
+✅ Inline Assembly 
+    → Directly write assembly code inside C++ (asm("mov eax, ebx")).
+✅ Deterministic Destruction 
+    → Objects are destroyed exactly when they go out of scope, unlike Java/Python’s garbage collection.
+✅ Zero Runtime Overhead 
+    → Unlike Java, Python, and JavaScript, C++ has no runtime dependency.
+✅ Exception Handling (But Unsafe) 
+    → Supports throw/catch, but does not enforce handling like Java.
+
+💡 Best Used For → Game development, high-performance computing, system programming, embedded systems.

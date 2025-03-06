@@ -1,0 +1,24 @@
+🦀 Rust (Memory Safety & Zero-Cost Abstractions)
+
+✅ Ownership Model 
+    → Prevents memory leaks by enforcing strict rules (move, borrow).
+✅ No Null Pointers 
+    → Uses Option<T> instead of null, eliminating NullPointerException.
+✅ No Garbage Collector 
+    → Memory is automatically freed when it goes out of scope.
+✅ Compile-Time Thread Safety 
+    → Borrow checker prevents race conditions.
+✅ Pattern Matching (match) 
+    → More powerful than switch-case (match x { Some(v) => v, None => 0 }).
+✅ Zero-Cost Abstractions 
+    → High-level constructs with no runtime overhead.
+✅ Memory-Safe Concurrency 
+    → Threads are safe at compile-time (std::thread::spawn).
+✅ Immutable by Default 
+    → Variables cannot be changed unless explicitly marked (mut).
+✅ Built-in Safety for Error Handling (Result<T, E>) 
+    → No need for exceptions.
+✅ No Implicit Type Conversions 
+    → Prevents bugs like JavaScript’s "5" + 5.
+
+💡 Best Used For → System programming, web assembly (WASM), blockchain, embedded systems.

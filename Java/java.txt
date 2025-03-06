@@ -1,0 +1,20 @@
+☕ Java (Cross-Platform & Strict OOP)
+
+✅ JVM (Write Once, Run Anywhere) 
+    → Code runs on any device with a Java Virtual Machine (JVM).
+✅ Automatic Garbage Collection     
+    → Eliminates manual memory management (unlike C++).
+✅ Checked Exceptions   
+    → Forces developers to handle exceptions at compile-time (throws IOException).
+✅ Class-Based OOP (Strict OOP Model) 
+    → Everything is inside a class (public class MyClass).
+✅ Multithreading with Built-in Thread Class 
+    → Native thread management (new Thread(() -> {...})).
+✅ Java Reflection API 
+    → Dynamically inspect and modify code at runtime (Class.forName("MyClass")).
+✅ Security Sandboxing 
+    → JVM isolates code execution, preventing security vulnerabilities.
+✅ Rich Standard Library (java.util, java.nio) 
+    → Provides built-in support for networking, I/O, and collections.
+
+💡 Best Used For → Enterprise applications, backend services, Android development.

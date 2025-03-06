@@ -1,0 +1,22 @@
+🌐 JavaScript (Web-Centric & Event-Driven)
+
+✅ Prototype-Based OOP 
+    → No traditional classes, uses prototypes (Object.create(proto)).
+✅ Event-Driven Execution 
+    → Uses an event loop instead of threads for concurrency.
+✅ Non-Blocking I/O (Node.js) 
+    → Async execution using async/await, setTimeout(), and Promises.
+✅ Dynamic Typing 
+    → No need to specify variable types (let x = 10;).
+✅ Run Anywhere (Client & Server-Side) 
+    → JavaScript runs in browsers and on servers (via Node.js).
+✅ Closures & First-Class Functions 
+    → Functions can be assigned to variables, passed as arguments.
+✅ Weak Typing (Type Coercion) 
+    → "5" + 5 → "55" (implicit type conversion).
+✅ No Explicit Main Function 
+    → Code runs automatically in browsers.
+✅ Single-Threaded but Async 
+    → Uses the event loop instead of multi-threading.
+
+💡 Best Used For → Web development, frontend (React, Vue, Angular), backend (Node.js).
