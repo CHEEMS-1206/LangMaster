@@ -20,3 +20,245 @@
     → Supports throw/catch, but does not enforce handling like Java.
 
 💡 Best Used For → Game development, high-performance computing, system programming, embedded systems.
+
+KEYWORDS - 
+    Control Flow
+        if
+        else
+        else if
+
+        switch
+        case
+        default
+
+        for
+        while
+        do
+
+        break
+        continue
+        return
+        goto
+
+    Data Types
+        bool
+        char
+        int
+        float
+        double
+        void
+        wchar_t
+
+        short
+        long
+        signed
+        unsigned
+
+        char8_t
+        char16_t
+        char32_t (C++11)
+
+    Storage Class Specifiers
+        static
+        extern
+        register
+        mutable
+        thread_local (C++11)
+
+    Type Qualifiers
+        const
+        volatile
+
+    User-defined Types & Structures
+        class
+        struct
+        union
+        enum
+
+        typedef
+        typename
+
+    Function Modifiers
+        explicit
+        friend
+        inline
+        virtual
+
+    Memory Management
+        new
+        delete
+
+    Exception Handling
+        try
+        catch
+        throw
+
+        noexcept (C++11)
+
+    Templates & Meta-programming
+        template
+        typename
+        concept (C++20)
+        requires (C++20)
+
+    Namespace & Scope
+        namespace
+        using
+        this
+        public
+        private
+        protected
+
+    Operators & Overloading - 
+        1. Arithmetic Operators
+            Operator	Description
+            +	        Addition
+            -	        Subtraction
+            *	        Multiplication
+            /	        Division
+            %	        Modulus (remainder)
+
+        2. Assignment Operators
+            Operator	Description
+            =	        Assign value
+            +=	        Add and assign
+            -=	        Subtract and assign
+            *=	        Multiply and assign
+            /=	        Divide and assign
+            %=	        Modulus and assign
+            &=	        Bitwise AND and assign
+            `	        =`
+            ^=	        Bitwise XOR and assign
+            <<=	        Left shift and assign
+            >>=	        Right shift and assign
+
+        3. Relational (Comparison) Operators
+            Operator	Description
+            ==      	Equal to
+            !=      	Not equal to
+            >	        Greater than
+            <	        Less than
+            >=      	Greater than or equal to
+            <=      	Less than or equal to
+
+        4. Logical Operators
+            Operator	Description
+            &&	        Logical AND
+            `	        
+            !	        Logical NOT
+
+        5. Bitwise Operators
+            Operator	Description
+            &	        Bitwise AND
+            `	        `
+            ^	        Bitwise XOR
+            ~	        Bitwise NOT
+            <<	        Left shift
+            >>	        Right shift
+
+        6. Increment and Decrement Operators
+            Operator	Description
+            ++	        Increment (prefix/postfix)
+            --	        Decrement (prefix/postfix)
+
+        7. Conditional (Ternary) Operator
+            Operator	Description
+            ? :	        Ternary (conditional expression)
+
+        8. Scope Resolution Operator
+            Operator	Description
+            ::	        Scope resolution
+
+        9. Pointer and Address Operators
+            Operator	Description
+            *	        Pointer dereference
+            &	        Address-of operator
+
+        10. Member Access Operators
+            Operator	Description
+            .	        Access member of object
+            ->	        Access member via pointer
+
+        11. sizeof Operator
+            Operator	Description
+            sizeof	    Returns size of data type
+
+        12. Type Casting Operators
+            Operator	        Description
+            type()	            C-style casting
+            static_cast<>	    Compile-time cast
+            dynamic_cast<>	    Runtime cast for polymorphism
+            const_cast<>	    Casts away const-ness
+            reinterpret_cast<>	Reinterprets bit pattern
+
+        13. Comma Operator
+            Operator	Description
+            ,	        Evaluates multiple expressions, returns last
+        14. Other/Miscellaneous Operators
+            Operator	Description
+            new	        Allocates memory
+            delete	    Deallocates memory
+            typeid	    Gets type information
+            ->*	        Pointer to member via pointer
+            .*	        Pointer to member via object
+            
+        and
+        or
+        not
+
+        bitand
+        bitor
+        compl
+
+        xor
+        xor_eq
+        and_eq
+        or_eq
+        not_eq
+
+    Compile-time & Type Checking
+        sizeof
+        alignas
+        alignof
+
+        decltype (C++11)
+        constexpr (C++11, enhanced in C++14 and C++20)
+        static_assert (C++11)
+
+    Coroutines (C++20)
+        co_await
+        co_yield
+        co_return
+
+    Alternative Operator Representations - C++ allows symbolic operators to be replaced with textual equivalents:
+        and → &&
+        or → ||
+        not → !
+        bitand → &
+        bitor → |
+        compl → ~
+        xor → ^
+        xor_eq → ^=
+        and_eq → &=
+        or_eq → |=
+        not_eq → !=
+
+    Special Mentions
+        export (was used for templates in C++98 but removed in C++11, then reintroduced in C++20 for modules).
+        final, override (C++11) are used for inheritance but aren't true "keywords" in a strict sense.
+        if constexpr (C++17) is a special compile-time branching mechanism.     
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Programming fundamentals in c++ 
+
+1.  Basic Data Handling
+        Variables and Constants 
+            Storage for data values.
+        Data Types 
+            Primitive (int, float, char, boolean) and complex (arrays, objects, structs).
+        Type System 
+            Static or dynamic typing, strong or weak typing.
+        Type Conversion 
+            Implicit and explicit (casting).
+            

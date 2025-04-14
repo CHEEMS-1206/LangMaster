@@ -18,3 +18,200 @@
     → Provides built-in support for networking, I/O, and collections.
 
 💡 Best Used For → Enterprise applications, backend services, Android development.
+
+KEYWORDS - 
+    1. Control Flow Statements
+        if
+        else
+
+        switch
+        case
+        default
+
+        for
+        while
+        do
+
+        break
+        continue
+        return
+
+    2. Primitive Data Types and Operators
+        byte
+        short
+        int
+        long
+        float
+        double
+        char
+        boolean
+        void (used for methods that do not return a value)
+
+    2.1 Operators - 
+        1. Arithmetic Operators
+            Operator	Description
+            +	        Addition
+            -	        Subtraction
+            *	        Multiplication
+            /	        Division
+            %	        Modulus (remainder)
+        
+        2. Assignment Operators
+            Operator	Description
+            =	        Assign value
+            +=	        Add and assign
+            -=	        Subtract and assign
+            *=	        Multiply and assign
+            /=	        Divide and assign
+            %=	        Modulus and assign
+            &=	        Bitwise AND and assign
+            `	        =`
+            ^=	        Bitwise XOR and assign
+            <<=	        Left shift and assign
+            >>=	        Right shift and assign
+
+        3. Relational (Comparison) Operators
+            Operator	Description
+            ==      	Equal to
+            !=      	Not equal to
+            >	        Greater than
+            <	        Less than
+            >=      	Greater than or equal to
+            <=      	Less than or equal to
+            instanceOf  Test Object type 
+        
+        4. Logical Operators
+            Operator	Description
+            &&	        Logical AND
+            `	        
+            !	        Logical NOT
+
+        5. Bitwise Operators
+            Operator	Description
+            &	        Bitwise AND
+            `	        `
+            ^	        Bitwise XOR
+            ~	        Bitwise NOT
+            <<	        Left shift
+            >>	        Right shift
+            >>>         Umsigned right shift 
+
+        6. Type Cast Operator
+            Operator	Description
+            (type)	    Casts one type to another
+
+        7. Conditional (Ternary) Operator
+            Operator	Description
+            ? :	        Ternary (conditional expression)
+
+        8. Unary Operators
+            Operator	Description
+            +	        Unary plus (positive value)
+            -	        Unary minus (negation)
+            ++	        Increment (prefix and postfix)
+            --	        Decrement (prefix and postfix)
+            !	        Logical NOT
+            ~	        Bitwise complement
+
+        9. Type Cast Operator
+            Operator	Description
+            (type)	    Casts one type to another
+
+        10. String Concatenation Operator
+            Operator	Description
+            +	        Concatenates strings
+
+        11. Special Operators
+            Operator	Description
+            .	        Member access (dot)
+            []	        Array indexing
+            ()	        Method call
+            ,	        Comma separator (used in for loops)
+
+    3. Object-Oriented Programming (OOP)
+        class
+        interface
+        enum
+
+        extends (used for inheritance)
+        implements (used to implement interfaces)
+        this (refers to the current object)
+        super (refers to the parent class)
+        new (used to create objects)
+        instanceof (used for type checking)
+
+    4. Exception Handling
+        try
+        catch
+        finally
+        throw (used to throw an exception)
+        throws (declares exceptions that a method may throw)
+
+    5. Modifiers (Access & Non-Access)
+        Access Modifiers
+            public
+            private
+            protected
+
+        Non-Access Modifiers
+            static (used for class-level methods/variables)
+            final (used to declare constants, prevent method overriding and inheritance)
+            abstract (used to define abstract classes/methods)
+            synchronized (used for thread synchronization)
+            volatile (used for memory consistency in multithreading)
+            transient (used to exclude fields from serialization)
+            strictfp (ensures floating-point calculations follow IEEE 754)
+            native (indicates that a method is implemented in native code)
+
+    6. Package & Import
+        package (declares a package)
+        import (imports other Java packages/classes)
+
+    7. Multi-Threading & Concurrency
+        synchronized (used for thread synchronization)
+        volatile (used for shared variables across threads)
+
+    8. Variable & Method Keywords
+        final (declares constants, prevents inheritance and method overriding)
+        static (declares class-level members)
+        return (used to return a value from a method)
+        void (declares methods with no return value)
+
+    9. Java Memory Management
+        new (allocates memory for objects)
+        null (represents the absence of a value)
+
+    10. Assertions & Debugging
+        assert (used for runtime debugging)
+
+    11. Special Keywords (Since Java 9+)
+        exports (used in Java modules to expose packages)
+        opens (used in Java modules to allow deep reflection)
+        module (declares a Java module)
+        requires (specifies dependencies in a module)
+        provides (used in Java modules for service providers)
+        uses (specifies a service interface for a module)
+        opens (allows reflection access to a package)
+
+List of Reserved Words (Not Used as Keywords) - These words are reserved for future use but are not currently used as keywords:
+        goto (reserved but not used)
+        const (reserved but replaced by final in Java)
+    
+Java Reserved Literals - Java also has three reserved literals:
+        true (boolean value)
+        false (boolean value)
+        null (represents no object reference)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Programming fundamentals in java 
+
+1.  Basic Data Handling
+        Variables and Constants 
+            Storage for data values.
+        Data Types 
+            Primitive (int, float, char, boolean) and complex (arrays, objects, structs).
+        Type System 
+            Static or dynamic typing, strong or weak typing.
+        Type Conversion 
+            Implicit and explicit (casting).
