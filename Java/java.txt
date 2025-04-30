@@ -206,12 +206,1222 @@ Java Reserved Literals - Java also has three reserved literals:
 
 Programming fundamentals in java 
 
-1.  Basic Data Handling
+1.1  Basic Data Handling
         Variables and Constants 
             Storage for data values.
-        Data Types 
-            Primitive (int, float, char, boolean) and complex (arrays, objects, structs).
-        Type System 
-            Static or dynamic typing, strong or weak typing.
-        Type Conversion 
-            Implicit and explicit (casting).
+            ex  // Typed variables
+                type varName;  // Declaration
+                varName = value;  // Initialisation
+                type varName = valeue;  // Declaration with Initialisation
+                ... 
+            ex  // Inference variable - data type is inferred at compiletime
+                // initialisation during declaration is important
+                // can only be used for local variables
+                var varName = value  
+            ...
+            ex  // Constants in java using final keyword
+                final type varName = value  
+                ...
+
+            There are 3 kinds of variables on basis of scope - 
+                1 . Local variables - declared inside function body they cant be used without initialisation else they will result in compilation error.
+                                    - such variables can be declared using var for type inference at compiletime.
+                2 . Instance variable – declared in a class but outside any method (non-static), they have a default value as per their type and hence can be used without initialisation.
+                3 . Static (Class) Variable - declared with static in a class but outside any method.
+          
+1.2  Data Types 
+        Primitive (int, float, char, boolean) and complex (arrays, objects, structs).
+            1 . Primitive - 
+                    Primitive data types are the most basic data types that hold a single value. 
+                    They are not objects and are defined by the language itself. 
+                    There are 8 primitive data types in Java:
+
+                    Data    Type	Size	Default Value	Description
+                    byte	1 byte	0	    Represents      an 8-bit integer value
+                    short	2 bytes	0	    Represents      a 16-bit integer value
+                    int	    4 bytes	0	    Represents      a 32-bit integer value
+                    long	8 bytes	0L	    Represents      a 64-bit integer value
+                    float	4 bytes	0.0f	Represents      a 32-bit floating-point value
+                    double	8 bytes	0.0d	Represents      a 64-bit floating-point value
+                    char	2 bytes	'\u0000'Represents      a single 16-bit Unicode character
+                    boolean	1 byte	false	Represents      a true or false value
+            2 . Complex - 
+                Non-primitive data types are objects or references to objects, and they are created by the programmer.
+                    Common Non-Primitive Data Types:
+                        String: Represents a sequence of characters. 
+                                Not a primitive, but behaves similarly.
+                            Ex - String str = "Hello world" 
+
+                        Arrays: Holds multiple values of the same type.
+                            Ex - dataType[] arrayName = {val1,val2....}
+
+                        Classes/Objects: Created from user-defined classes.
+                            ex - ClassName instanceName = new ClassName()
+
+                        Interfaces: Defines a contract for classes to implement.
+                            ex - implemented by class and later referenced as instances.
+
+                        Enums : An enum is a special class that represents a fixed set of constants
+                            ex - enum Day { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY }
+
+                        Wrapper classes : Each of the 8 primitive types has a corresponding wrapper class in Java that provides methods to convert between types, compare values, etc.
+                                          Also there is one Object wrapper class as well.
+                            ex - Wrapper varName = value;
+
+                            Integer (for int)
+                            Double (for double)
+                            Character (for char)
+                            Boolean (for boolean)
+                            Long (for long)
+                            Float (for float)
+                            Byte (for byte)
+                            Short (for short)
+                            Object (for all objects in java) 
+
+                            * All classes in Java ultimately inherit from the Object class which is the root class of the Java class hierarchy. 
+                              This makes Object a non-primitive type, and it can hold references to any object.
+
+                        Collections : Java provides several collection classes that are part of the Java Collections Framework. 
+                                      These are non-primitive data types that store multiple objects or values.
+                            Ex  List -
+                                    ArrayList
+                                        List<DataTypeWrappper> listRefName = new ArrayList<>()
+                                    LinkedList
+                                        List<DataTypeWrappper> listRefName = new LinkedList<>()
+                                Set -
+                                    HashSet
+                                    TreeSet 
+                                Map - 
+                                    HashMap
+                                    TreeMap
+                                Queue - 
+                                    LinkedList
+                                    PriorityQueue
+                            * when using JCF collections keep in mind using wrappers and not primitive types.
+                            * You’ll get a compilation error, because generics in Java only work with reference types, not primitive types.
+                                Map<int, int> map = new HashMap<>(); // incorrect
+                                Map<Integer, Integer> map = new HashMap<>(); // correct
+
+1.3  Type System & Type Conversion
+            * Java is statically typed.
+                Variable types are checked at compile-time, and you must declare the type (or use var with type inference).
+                Java does not allow changing a variable’s type after it is declared.
+            * Java is strongly typed.
+                Once a variable is declared to be of a certain type, it cannot be used as another type without an explicit conversion (casting).
+                Java prevents automatic type coercion between unrelated types.
+         
+            Implicit Type conversion - 
+                Also known as automatic type conversion, it happens when:
+                    A smaller type is converted into a larger type automatically.
+                    No data loss.
+                    Handled by Java automatically.
+                ex - byte byteVar = value
+                     int newByteVar = byteVar
+
+            Explicit Type conversion -
+                Also called type casting, you do it manually when:
+                    * A larger type is converted into a smaller type.
+                    * Possible data loss.
+                    * Requires a cast operator: (type)
+                ex - long oldLong = longValue 
+                     int newLong = (int)oldLong
+            
+            Type conversion between incompatible types can result in compiletime error, to acheive such we can use wrapper class and their utility methods.
+                ex - String str = (int)num // reults in compile time error
+                     String str = Integer.toString(num) // wrapper utility methods
+
+2.  Control Flow - 
+        Conditionals - Used to make decisions based on conditions.
+            if, else, switch statements.
+                if(condition){
+                    // if block
+                }else if(condition){
+                    // else if block
+                }else{
+                    // else block
+                }
+                * 
+
+                switch(comparatorValue){
+                    case val1 : 
+                        // block for this case being true
+                        break;
+                    default : 
+                        // if none case match
+                }
+                *
+
+        Loops 
+            for, while, do-while.
+                for(declaration; condition; manipulation){
+                    // loop block
+                }
+                * Used when number of iterations is known.
+
+                declaration
+                while(condition){
+                    // loop block
+                    manipulation
+                }
+                * Used when number of iterations is unknown
+
+                declaration
+                do{
+                    // loop block 
+                    manipulation 
+                } while (condition);
+                * Guarantees the block runs at least once.
+
+        Jump Statements 
+            break, continue, goto (in some languages), return.
+                break - Exits the loop or switch immediately.
+                continue - Skips the current iteration and continues the loop.
+                return - Exits from the current method and optionally returns a value.
+                goto  - reserved in java but has not been implemented yet.
+        
+3.  Functions and Modularity
+        Functions (Methods) - In Java, functions are called methods and are used to create reusable code blocks.
+            Defining reusable code blocks.
+            ex - returnType functionName(parameter1, parameter2, ...) {
+                    // body
+                    return result;  // if returnType is not void
+                }
+            calling the methods - 
+            ex - functionName(args // if params are defined)
+            
+        Function Parameters and Return Types 
+            Parameters	Input values sent to a method
+            Return Type	Output type returned by a method
+            void	    No return value
+            Arguments   Values sent when calling function to replace params
+
+        Pass by value and Pass by reference - 
+            Java is strictly Pass-by-Value
+            1 . Primitives — Clear Pass-by-Value
+                void modify(int x) {
+                    x = 100;
+                }
+                int a = 10;
+                modify(a);
+                System.out.println(a); // 🔸 Output: 10
+                * Java copies the value of a into x. Changing x doesn’t affect a.
+            2 . Objects — Still Pass-by-Value, But...
+                class Person {
+                    String name;
+                }
+                void changeName(Person p) {
+                    p.name = "Alice";
+                }
+                Person p1 = new Person();
+                p1.name = "Bob";
+                changeName(p1);
+                System.out.println(p1.name);  // 🔸 Output: Alice ✅
+
+                * Why did p1.name change?
+                    Because p is a copy of the reference to the Person object.
+                    Both p and p1 point to the same object in memory.
+                    So modifying the object through p reflects in p1.
+                
+                void reassign(Person p) {
+                    p = new Person();
+                    p.name = "Charlie";
+                }
+                reassign(p1);
+                System.out.println(p1.name);  // 🔸 Output: Alice ❌ not Charlie
+                
+                * why did p1 not changed now ? 
+                    Here, p is reassigned to a new object.
+                    p1 still points to the original object.
+                    The reassignment didn’t affect p1.
+        
+        varargs in function - 
+            Allows passing variable number of arguments.
+            ex - 
+                void show(String... names) {
+                    for(String name : names) {
+                        System.out.println(name);
+                    }
+                }
+                show("A","b","C") and show("y") both work fine.
+
+        Recursion 
+            Functions calling themselves.
+                A method that calls itself to solve smaller instances of the same problem.
+                ex int main(){
+                    main();
+                }
+
+        Scope & Lifetime
+            Local -
+                Declared inside a method or block.
+                Exists only while the block runs.
+            global - (global to object) 
+                Non-static variables declared in a class.
+                Accessible in non-static methods.
+            static - 
+                Shared across all instances.
+                Declared using static keyword.
+        
+        - Defined more clearly in OOP section -  
+        Overloading - 
+            Java allows multiple methods with the same name but different parameters (type, number, or order).
+            ex - 
+                void print(String s) {
+                    System.out.println(s);
+                }
+                void print(int n) {
+                    System.out.println(n);
+                }
+                * Which fn is called Decided at compile time (Static Polymorphism).
+        
+        overriding - 
+            Used in inheritance — a child class redefines a parent class method.
+            ex - 
+                class Animal {
+                    void sound() {
+                        System.out.println("Animal sound");
+                    }
+                }
+                class Dog extends Animal {
+                    @Override
+                    void sound() {
+                        System.out.println("Bark");
+                    }
+                }
+                * Requires inheritance
+                * which fn is called Decided at runtime (Dynamic Polymorphism)
+        
+        Final functions - 
+            a fn in class defined as final, Can’t be overridden by subclasses.
+        
+        Abstract methods - 
+            a fn defined using abstract keyword is Declared without implementation — must be overridden in subclasses.
+        
+        Access modifiers with fns - 
+            Control visibility of methods:
+                public: accessible everywhere
+                private: only inside the class
+                protected: within the package and subclasses
+                default (no modifier): package-private
+
+        Lambda Expressions (Java 8+)
+            Used to write shorter function definitions, often with functional interfaces.
+            ex - 
+                interface Greet {
+                    void sayHello();
+                }
+                Greet g = () -> System.out.println("Hi there!");
+                g.sayHello();
+        
+        Functional Interfaces (Java 8+)
+            Interfaces with only one abstract method. They can be implemented using lambda expressions.
+            ex -
+                @FunctionalInterface
+                interface Operation {
+                    int perform(int a, int b);
+                }
+
+        Constructors
+            Although not regular methods, constructors are special methods used to initialize objects.
+            properties of constructors - 
+                Same name as class.
+                No return type.
+                Can be overloaded (multiple constructors with different parameters).
+                Java provides a default constructor if none is defined.
+
+        Return Type Covariance
+            While overriding a method, the return type in subclass can be a subtype of the parent method’s return type.
+            ex - 
+            class Animal {}
+            class Dog extends Animal {}
+
+            class A {
+                Animal getAnimal() { return new Animal(); }
+            }
+
+            class B extends A {
+                @Override
+                Dog getAnimal() { return new Dog(); }
+            }
+
+        Default and Static Methods in Interfaces (Java 8+)
+            Java 8 introduced default methods in interfaces. 
+            These methods can have a body and provide default behavior, which is useful for backward compatibility when interfaces evolve.
+            You can now add method implementations in interfaces:
+            ex - 
+                interface Demo {
+                    default void show() {
+                        System.out.println("Default method");
+                    }
+                    static void staticMethod() {
+                        System.out.println("Static in interface");
+                    }
+                }
+
+        Anonymous Inner Class
+            You can define and use a class (especially interfaces) on the fly using an anonymous method.
+            ex - 
+                Runnable r = new Runnable() {
+                    public void run() {
+                        System.out.println("Running anonymously");
+                    }
+                };
+
+        Method References (Java 8+)
+            A cleaner alternative to lambdas when you just call an existing method.
+            ex - 
+                class Utils {
+                    static void say(String msg) {
+                        System.out.println(msg);
+                    }
+                }
+
+                // Usage
+                Consumer<String> printer = Utils::say;
+                printer.accept("Hello from method ref!");
+
+        Synchronized Methods
+            For multithreaded programs — ensures thread safety.
+            ex - 
+                synchronized void update() {
+                    // only one thread can run this at a time
+                }
+
+4.  Memory & Resource Management
+        In Java, memory and resource management is largely automatic
+        
+        Heap & Stack Memory - Memory allocation and deallocation.
+            Java uses two primary memory areas:
+
+            Heap Memory
+                Used for: 
+                    Storing objects and instance variables.
+                Characteristics:
+                    Dynamic memory allocation.
+                    Objects are created on the heap using the new keyword.
+                    Memory management is automatic (handled by Garbage Collection).
+                    Can grow and shrink during the lifetime of the program.
+                Lifetime: 
+                    The memory in the heap is managed by the Garbage Collector. Once an object is no longer referenced, it is considered garbage and can be collected.
+
+            Stack Memory
+                Used for: 
+                    Storing local variables and method calls.
+                Characteristics:
+                    Static memory allocation.
+                    Each thread has its own stack, which stores method calls and local variables.
+                    Stack memory is automatically deallocated when the method finishes executing (i.e., stack unwinding).
+                Lifetime: 
+                    The memory is automatically reclaimed when a method execution ends, and the local variables go out of scope.
+        
+        Garbage Collection 
+            Automatic (Java, Python) or manual (C, C++).
+            Garbage Collection (GC)
+                Java automatically manages memory through Garbage Collection (GC), which runs in the background to clean up unused objects and reclaim memory.
+                How Garbage Collection Works
+                    Automatic Process: 
+                        When an object is no longer referenced, the GC marks it as eligible for collection.
+                    Types of Garbage Collectors:
+                        Serial GC: Single-threaded; used in simpler applications.
+                        Parallel GC: Uses multiple threads for collection (default for most applications).
+                        G1 Garbage Collector: Aims to minimize GC pauses.
+                        ZGC and Shenandoah: Low-latency garbage collectors.
+                    Memory Leaks
+                        Even with GC, memory leaks can occur if you maintain unnecessary references to objects that you no longer need. Java GC can’t reclaim memory if the object is still being referenced, even if it's not used.
+                    Manual vs Automatic Garbage Collection
+                        In languages like C++, you manually manage memory using malloc()/free() or new/delete. However, in Java, GC automatically takes care of deallocating memory.
+
+        Pointers & References 
+            Java does not have pointers (unlike languages like C or C++). Instead, Java uses references to access objects.
+            What’s a reference in Java?
+                A reference in Java is similar to a pointer in C/C++, but you can’t directly manipulate memory addresses in Java.
+                When you create an object using new, you get a reference to that object.
+                Java manages memory access and prevents direct memory manipulation (which helps avoid errors like dangling pointers).
+            Why Java does not have pointers:
+                Security: Pointers can lead to accessing memory locations directly, which could be dangerous.
+                Simplicity: Eliminates bugs such as null pointer dereferencing or buffer overflows.
+        
+        To be continued -
+            Escape analysis     
+            Stack vs heap in multithreading
+            Finalisation using finalize keyword
+            Types of refrences - soft weak and phantom
+            JVM and memory models for thread safety
+            JNI - java native interface
+            Escape Analysis and Scalar Replacement
+            Advanced GC topics like - generational GC and GC tuning 
+            OutOfMemoryError (OOM) Handling 
+
+5.  Object-Oriented Features (OOP)
+        Object-Oriented Programming (OOP) is the core paradigm of Java. 
+        It focuses on objects and classes to structure software programs. 
+        Here's an in-depth look at each of the major OOP concepts in Java, 
+        as well as some extra advanced topics:
+        
+        Classes & Objects 
+            Creating reusable blueprints.
+            Classes - 
+                A class is a blueprint or template from which objects are created. 
+                It defines the structure (fields/properties) and behaviors (methods/functions) that the objects will have.
+                    Ex - 
+                    class Car {
+                        String color;      // Field
+                        int speed;         // Field
+
+                        void accelerate() {  // Method
+                            speed += 10;
+                        }
+                    }
+                * A Final Classes: Cannot be subclassed.
+
+            Object - 
+                An object is an instance of a class. 
+                It is created from the class template and has its own data (fields) and behaviors (methods).
+                ex - 
+                    Car myCar = new Car();  // Creating an object of the class
+                    myCar.color = "Red";     // Setting the object's field
+                    myCar.accelerate();      // Calling the object's method
+
+            Constructor - 
+                A constructor is a special method in a class that:
+                    Has the same name as the class
+                    Does not have a return type
+                    Is used to initialize objects at the time of their creation
+                    Constructors cannot be abstract, static, final, or synchronized.
+                    A class can have multiple constructors (overloading).
+                    this() is used for constructor chaining within the same class.
+                    super() is used to call parent class constructor.
+                 Types of Constructors in Java
+                    Type	                    Description
+                    Default Constructor	        No-argument constructor created by compiler (if no constructor is defined)
+                    No-arg Constructor	        User-defined constructor with no parameters
+                    Parameterized Constructor	Constructor with parameters to initialize fields with specific values
+                    Copy Constructor	        Not a built-in feature, but can be implemented manually (like in C++)
+                    Private Constructor	        Used in Singleton pattern to restrict object creation from outside
+            
+            Constructor overloading - 
+                Multiple constructors with different parameter lists in the same class.
+            
+            constructor chaining - 
+                Constructor chaining is when one constructor calls another constructor in the same or superclass.
+                There are 2 kinds of Constructor chaining - 
+                    1 . Within the Same Class – using this()
+                    ex - 
+                            class Student {
+                                String name;
+                                int age;
+                                Student() {
+                                    this("Unknown", 0); // calls the parameterized constructor
+                                    System.out.println("Default constructor called");
+                                }
+                                Student(String name, int age) {
+                                    this.name = name;
+                                    this.age = age;
+                                    System.out.println("Parameterized constructor called");
+                                }
+                            }
+                    2 . From a Superclass – using super() - A subclass constructor can call its parent class constructor using super(...)
+                    ex - 
+                            class Person {
+                                Person() {
+                                    System.out.println("Person constructor called");
+                                }
+                            }
+                            class Employee extends Person {
+                                Employee() {
+                                    super(); // calls Person constructor
+                                    System.out.println("Employee constructor called");
+                                }
+                            }
+                    Rules of Constructor Chaining
+                        this() or super() must be the first statement in the constructor.
+                        You cannot use both this() and super() in the same constructor.
+                        Constructor chaining can span multiple levels of inheritance.
+
+            Anonymous Classes and Lambda Expressions
+                Java supports anonymous classes, which allow you to create and instantiate classes without giving them a name. 
+                With lambda expressions (since Java 8), Java made it even easier to implement functional interfaces (interfaces with a single abstract method).
+                ex - 
+                    Runnable r = new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("Running in an anonymous class.");
+                        }
+                    };
+                    new Thread(r).start();
+                ex - 
+                    Runnable r = () -> System.out.println("Running with a lambda expression.");
+                    new Thread(r).start();
+
+            Inner class - 
+                Java allows you to define classes within other classes. These are known as inner classes and they can be:
+                    Non-static nested classes (inner classes)
+                    Static nested classes
+                    Anonymous classes
+                    Local classes (classes defined within a method)
+                ex - 
+                    class OuterClass {
+                        int x = 10;
+                        class InnerClass {
+                            void display() {
+                                System.out.println("Value of x: " + x);
+                            }
+                        }
+                    }
+                    OuterClass outer = new OuterClass();
+                    OuterClass.InnerClass inner = outer.new InnerClass();
+                    inner.display();
+
+        4 pillars of OOP - 
+            Encapsulation - Data hiding via access modifiers.
+                What it is: 
+                    Encapsulation is the practice of data hiding to protect object properties from direct modification. 
+                    The idea is to provide getter and setter methods to access and modify the object's data in a controlled way.
+                    encapsulation provides a way to control the access to the data by using access modifiers 
+                    It is achieved by bundling the data (attributes) and methods (functions) that operate on the data into a single unit, or class
+                Why it's important: 
+                    Encapsulation ensures that the internal state of an object is protected and controlled, 
+                    maintaining the integrity of the data.
+                Types of modifiers for acheiving encapsulation :
+                    Public: Can be accessed from anywhere.
+                    Private: Accessible only within the class.
+                    Protected: Accessible within the same package and by subclasses.
+                    Default (Package-Private): Accessible only within the same package.
+                ex - 
+                    class Person {
+                        private String name;  // private field, cannot be accessed directly
+                        // Getter method to access the name
+                        public String getName() {
+                            return name;
+                        }
+                        // Setter method to modify the name
+                        public void setName(String name) {
+                            this.name = name;
+                        }
+                    }
+                    Person person = new Person();
+                    person.setName("John");  // Setting the name via setter
+                    System.out.println(person.getName());  // Getting the name via getter
+
+            Inheritance - Code reusability across classes.
+                What it is: 
+                    Inheritance allows one class to inherit properties and behaviors (fields and methods) from another class, enabling code reuse and the creation of a class hierarchy.
+                    Super keyword is used to call superclass methods and constructors.
+
+                Parent class (Superclass): 
+                    The class being inherited from.
+                Child class (Subclass): 
+                    The class that inherits from the superclass.
+                    Subclasses can override methods of the superclass to provide specific functionality.
+                Types:
+                    Single Inheritance: A class inherits from one superclass.
+                    Ex - 
+                        class Animal {
+                            void eat() {
+                                System.out.println("Animal is eating.");
+                            }
+                        }
+                        class Dog extends Animal { // Dog inherits from Animal
+                            void bark() {
+                                System.out.println("Dog is barking.");
+                            }
+                        }
+                        public class Main {
+                            public static void main(String[] args) {
+                                Dog dog = new Dog();
+                                dog.eat();  // Inherited from Animal
+                                dog.bark(); // Defined in Dog class
+                            }
+                        }
+
+                    Multilevel Inheritance: A class inherits from another class which itself is inherited from a superclass.
+                    ex - 
+                        class Animal {
+                            void eat() {
+                                System.out.println("Animal is eating.");
+                            }
+                        }
+                        class Dog extends Animal { // Dog inherits from Animal
+                            void bark() {
+                                System.out.println("Dog is barking.");
+                            }
+                        }
+                        class Puppy extends Dog { // Puppy inherits from Dog (which inherits from Animal)
+                            void play() {
+                                System.out.println("Puppy is playing.");
+                            }
+                        }
+                        public class Main {
+                            public static void main(String[] args) {
+                                Puppy puppy = new Puppy();
+                                puppy.eat();  // Inherited from Animal
+                                puppy.bark(); // Inherited from Dog
+                                puppy.play(); // Defined in Puppy class
+                            }
+                        }
+
+                    Hierarchical Inheritance: 
+                        In hierarchical inheritance, multiple classes inherit from a single superclass. 
+                        In other words, one class acts as the parent for several subclasses, and these subclasses 
+                        can have their own specific implementations while still inheriting common behavior from the parent class.
+                    Ex - 
+                        class Animal {
+                            void eat() {
+                                System.out.println("Animal is eating.");
+                            }
+                        }
+                        class Dog extends Animal { // Dog inherits from Animal
+                            void bark() {
+                                System.out.println("Dog is barking.");
+                            }
+                        }
+                        class Cat extends Animal { // Cat inherits from Animal
+                            void meow() {
+                                System.out.println("Cat is meowing.");
+                            }
+                        }
+                        public class Main {
+                            public static void main(String[] args) {
+                                Dog dog = new Dog();
+                                dog.eat();  // Inherited from Animal
+                                dog.bark(); // Defined in Dog
+                                Cat cat = new Cat();
+                                cat.eat();  // Inherited from Animal
+                                cat.meow(); // Defined in Cat
+                            }
+                        }
+
+                    Multiple 
+                        Inheritance: Java does not support multiple inheritance via classes but supports it via interfaces.
+                        A class can implement multiple interfaces, allowing it to inherit behavior from more than one source.
+                    Ex - 
+                        interface Animal {
+                            void eat();
+                        }
+                        interface Mammal {
+                            void walk();
+                        }
+                        class Dog implements Animal, Mammal { // Dog implements both Animal and Mammal interfaces
+                            public void eat() {
+                                System.out.println("Dog is eating.");
+                            }
+                            
+                            public void walk() {
+                                System.out.println("Dog is walking.");
+                            }
+                        }
+                        public class Main {
+                            public static void main(String[] args) {
+                                Dog dog = new Dog();
+                                dog.eat();  // Implemented from Animal interface
+                                dog.walk(); // Implemented from Mammal interface
+                            }
+                        }
+     
+            Polymorphism - Method overloading and overriding.
+                What it is: 
+                    Polymorphism allows one method to operate on different types of objects. There are two types of polymorphism in Java:
+                Types of polymorphism - 
+                    Compile-time polymorphism (Method Overloading)
+                    Runtime polymorphism (Method Overriding)
+
+                Method Overloading (Compile-time Polymorphism):
+                    The same method name is used, but with different parameter types or counts.
+                ex - 
+                    class MathOperations {
+                        int add(int a, int b) {
+                            return a + b;
+                        }
+                        
+                        double add(double a, double b) {
+                            return a + b;
+                        }
+                    }
+                    MathOperations math = new MathOperations();
+                    System.out.println(math.add(5, 10));       // Calls the int version
+                    System.out.println(math.add(5.5, 10.5));   // Calls the double version
+
+                Method Overriding (Runtime Polymorphism):
+                    A method in a subclass overrides a method of the superclass, allowing the subclass to provide its own implementation of that method.
+                ex - 
+                    class Animal {
+                        void sound() {
+                            System.out.println("Animal makes a sound");
+                        }
+                    }
+                    class Dog extends Animal {
+                        @Override
+                        void sound() {
+                            System.out.println("Dog barks");
+                        }
+                    }
+                    Animal animal1 = new Animal();
+                    animal1.sound();  // Calls the method in Animal class
+                    Animal animal2 = new Dog();
+                    animal2.sound();  // Calls the overridden method in Dog class
+
+            Abstraction – Hiding implementation details.
+                What it is: 
+                    Abstraction is the concept of hiding implementation details and showing only the necessary features of an object. This helps simplify complex systems by focusing only on essential aspects.
+                Abstract Classes: 
+                    A class that cannot be instantiated and may contain abstract methods (methods without a body).
+                    Used when there’s a common base class but you don’t want it to be instantiated directly. 
+                    Abstract classes may have abstract methods (without implementation).
+                    ex - 
+                        abstract class Shape {
+                            abstract void draw();  // Abstract method
+                            void color() {  // Concrete method
+                                System.out.println("Coloring the shape");
+                            }
+                        }
+                        class Circle extends Shape {
+                            void draw() {
+                                System.out.println("Drawing a circle");
+                            }
+                        }
+                        Circle circle = new Circle();
+                        circle.draw();   // Output: Drawing a circle
+                        circle.color();  // Output: Coloring the shape
+
+                Interfaces: 
+                    A contract that specifies a set of methods that must be implemented by a class.
+                    Used to define a contract or a set of methods without implementation. 
+                    Classes that implement the interface must provide their own implementation of the methods.
+                    ex - 
+                        interface Drawable {
+                            void draw();  // Method declaration, no body
+                        }
+                        class Circle implements Drawable {
+                            public void draw() {
+                                System.out.println("Drawing a circle");
+                            }
+                        }
+                        class Square implements Drawable {
+                            public void draw() {
+                                System.out.println("Drawing a square");
+                            }
+                        }
+                        Drawable shape1 = new Circle();
+                        shape1.draw();   // Output: Drawing a circle
+                        Drawable shape2 = new Square();
+                        shape2.draw();   // Output: Drawing a square
+
+                * Abstract classes and interfaces are used tpo acheive Contract-based programming.
+
+        Additional OOP features -
+            Deep vs Shallow Copy
+                Shallow Copy: 
+                    Copies the references of objects, not the actual objects. 
+                    If the original object changes, the copied object will reflect the change.
+                Deep Copy: 
+                    Copies both the object and the objects it references. 
+                    Changes to the original object won't affect the copied object.
+            instanceof Operator
+                The instanceof operator is used to check whether an object is an instance of a particular class or subclass.
+            Java Reflection
+                Reflection in Java allows runtime inspection and modification of classes, methods, fields, and other components.
+                It's a powerful feature but should be used sparingly as it can bypass the normal access control mechanisms and is generally slower than non-reflection-based code.
+                ex - 
+                    import java.lang.reflect.Method;
+                    class Person {
+                        public void sayHello() {
+                            System.out.println("Hello!");
+                        }
+                    }
+                    public class Main {
+                        public static void main(String[] args) throws Exception {
+                            Person person = new Person();
+                            // Get the Class object for Person
+                            Class<?> personClass = person.getClass();
+                            // Get the method "sayHello"
+                            Method method = personClass.getMethod("sayHello");
+                            // Invoke the method
+                            method.invoke(person);
+                        }
+                    }
+            Functional Interfaces - 
+                Functional interfaces are interfaces that have only one abstract method. 
+                exx - 
+                    interface Calculator {
+                        int add(int a, int b);
+                    }
+            Covariant Return Types
+                Java allows an overriding method to return a subtype of the return type declared in the overridden method.
+            Object Class Methods
+                All Java classes implicitly extend java.lang.Object, which provides some important methods you can override:
+                    toString()
+                    equals(Object obj)
+                    hashCode()
+                    clone()
+                    finalize() (Deprecated)
+                    getClass()
+                    notify(), notifyAll(), wait()
+            Marker Interfaces
+                Interfaces that have no methods but act as a tag for the class (used by JVM or frameworks).        
+            Immutable Classes
+                Creating objects whose state cannot change after construction. Using final class keyword.
+            Java Beans - Java classes that follow certain conventions:
+                Private properties
+                Public getters and setters
+                No-argument constructor
+            Object Cloning
+                Java allows you to clone objects through the Cloneable interface and the clone() method. 
+                This is useful when you need a deep copy of an object.
+                using cloneable interface.
+                ex - 
+                    class Person implements Cloneable {
+                        String name;
+                        int age;
+                        public Person clone() throws CloneNotSupportedException {
+                            return (Person) super.clone();
+                        }
+                    }
+                    Person p1 = new Person();
+                    p1.name = "John";
+                    p1.age = 25;
+                    try {
+                        Person p2 = p1.clone();
+                        System.out.println(p2.name);  // Output: John
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
+            Object serialisation and deserialisation -
+                Serialization - 
+                    Serialization is the process of converting a Java object into a byte stream so it can be:
+                        Stored in a file
+                        Transferred over a network
+                        Saved in memory for later use (e.g., caching)
+                Deserialization
+                    Deserialization is the reverse process: converting the byte stream back into a Java object.
+                How to Serialize in Java - 
+                    Requirements
+                        The class must implement the Serializable interface (marker interface).
+                        Fields that shouldn’t be serialized must be marked transient.
+                    EX - Serialization - 
+                        import java.io.*;
+                        class Student implements Serializable {
+                            String name;
+                            int age;
+                            // transient field won't be serialized
+                            transient String password;
+                            Student(String name, int age, String password) {
+                                this.name = name;
+                                this.age = age;
+                                this.password = password;
+                            }
+                        }
+                        public class SerializeExample {
+                            public static void main(String[] args) throws IOException {
+                                Student s1 = new Student("Alice", 21, "secret123");
+                                FileOutputStream fos = new FileOutputStream("student.ser");
+                                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                oos.writeObject(s1);
+                                oos.close();
+                                System.out.println("Object serialized!");
+                            }
+                        }
+                    Ex - Deserialization - 
+                        import java.io.*;
+                        public class DeserializeExample {
+                            public static void main(String[] args) throws IOException, ClassNotFoundException {
+                                FileInputStream fis = new FileInputStream("student.ser");
+                                ObjectInputStream ois = new ObjectInputStream(fis);
+                                Student s1 = (Student) ois.readObject();
+                                ois.close();
+                                System.out.println("Deserialized Object:");
+                                System.out.println("Name: " + s1.name);
+                                System.out.println("Age: " + s1.age);
+                                System.out.println("Password: " + s1.password); // will be null due to transient
+                            }
+                        }
+                Advanced Concepts
+                    Concept	                                Description
+                    transient	                            Skip a field during serialization
+                    serialVersionUID	                    Helps version control during deserialization
+                    Externalizable interface	            Gives full control of serialization logic
+                    Custom writeObject() / readObject()	    Customize what gets serialized
+                    ObjectOutputStream / ObjectInputStream	Core I/O streams for serialization
+
+6.  Error Handling & Debugging
+        Error vs Exception
+            Exception: Can be recovered from. (e.g., FileNotFoundException)
+            Error: Usually not recoverable. (e.g., OutOfMemoryError, StackOverflowError)
+        
+            Feature	                    Exception	                                            Error
+            Definition	                Problems that a program should catch and handle	        Serious issues that a program should not try to handle
+            Recoverable?	            Yes, usually recoverable	                            No, mostly not recoverable
+            Belongs to?	                java.lang.Exception	                                    java.lang.Error
+            Handled using try-catch?	Yes	Not                                                 recommended
+            Typical Causes	            Invalid input, missing files, network issues, etc.	    JVM issues like memory leaks, crashes, stack overflow
+            When to Handle	            In business logic to prevent crashes	                Rarely; let JVM handle them
+            Custom Subclassing?	        Yes, commonly extended	                                Rarely (and discouraged)
+            Example Classes	            IOException, SQLException, NullPointerException	        OutOfMemoryError, StackOverflowError, VirtualMachineError
+        
+        * Categories of throwable in java - 
+                            Throwable
+                                /     \
+                        Exception   Error
+                        /       \       
+                Checked   Unchecked (RuntimeException)
+            Checked Exceptions: Must be handled (e.g., IOException)
+            Unchecked Exceptions: Optional to handle (e.g., NullPointerException)
+            Errors: Typically ignored at the code level (e.g., OutOfMemoryError)
+
+        Exception Handling - Used to handle runtime errors gracefully without crashing the program.
+            try – Block where code might throw an exception
+            catch – Handles the exception
+            finally – Always executes (cleanup code)
+            throw – Used to throw an exception
+            throws – Declares exceptions a method might throw
+            ex - 
+                public class ExceptionDemo {
+                    public static void main(String[] args) {
+                        try {
+                            int a = 5 / 0; // ArithmeticException
+                        } catch (ArithmeticException e) {
+                            System.out.println("Exception caught: " + e.getMessage());
+                        } finally {
+                            System.out.println("Finally block always runs.");
+                        }
+                    }
+                }
+            * try-catch block Automatically closes resources like files, sockets.
+            
+            You can catch multiple exceptions in a single block: using  | (pipe) char
+            ex - 
+                try {
+                    // risky code
+                } catch (IOException | SQLException e) {
+                    e.printStackTrace();
+                }
+            
+            Java allows you to rethrow an exception in a way that the compiler knows the exact type using throws keyword.
+            ex - 
+                void read() throws IOException {
+                    try {
+                        throw new IOException("Error");
+                    } catch (Exception e) {
+                        throw e;
+                    }
+                }
+
+        Types of Exceptions
+            a) Checked Exceptions
+                Detected at compile-time
+                Must be either caught or declared using throws
+                Example: IOException, SQLException
+
+            b) Unchecked Exceptions
+                Detected at runtime
+                Subclass of RuntimeException
+                Example: NullPointerException, ArrayIndexOutOfBoundsException
+
+        Custom Exceptions - You can create your own exception classes by extending Exception or RuntimeException.
+            ex - 
+            class MyException extends Exception {
+                public MyException(String message) {
+                    super(message);
+                }
+            }
+
+        Assertions 
+            Ensuring conditions hold during execution, Used during development to test assumptions.
+            They're primarily for debugging and development, not production logic.
+            ex - 
+                assert condition : "Error Message";
+                int x = 10;
+                assert x > 0 : "x must be positive";
+            What Happens When an Assertion Fails?
+                case - asertions are enabled - 
+                    If the condition is false, Java throws an AssertionError.
+                    This is unchecked, meaning it’s a subclass of Error, not Exception.
+                    If not caught, the program terminates at that point.
+                case - assertions are disabled (default case in jvm) -
+                    Assertion statements are completely ignored by the JVM.
+                    The code runs as if the assertion wasn’t there.
+                ex - 
+                    public class Main {
+                        public static void main(String[] args) {
+                            int x = 5;
+                            assert x > 10 : "x is not greater than 10";  // This will fail
+                            System.out.println("This line won't be executed");
+                        }
+                    }
+                * how to enable/disable assertion check in jvm - 
+                    java -ea Main // enable assertions
+                    java -enableassertions Main 
+                    java -ea:com.example.MyClass Main // enable assertions for a specific class 
+                    java -da Main // disable assertions
+
+        Debugging Tools in Java IDEs (like IntelliJ, Eclipse)
+            Breakpoints – Pause execution at a specific line
+            Step into / Step over – Navigate through code line-by-line
+            Watch expressions – Monitor variable values in real-time
+            Stack trace – Understand the chain of calls leading to the error
+
+7.  Collections & Data Structures
+        JCF - Java Collection framework 
+            The Java Collections Framework is a unified architecture for representing and manipulating collections – groups of objects. It provides:
+                Interfaces: 
+                    Interfaces for different types of collections
+                    ex - Collection, List, Set, Queue, Map
+                    Core Interfaces - 
+                        0 . Collection<E>
+                            Root interface for all collections (except Map)
+                            Methods: add(), remove(), clear(), iterator(), size(), etc.
+
+                        1 . List<E>
+                                Ordered collection (allows duplicates)
+                                Positional access using indices
+                            Implementations:
+                                ✅ ArrayList, ✅ LinkedList, ✅ Vector, ✅ Stack
+
+                        2 . Set<E>
+                                No duplicate elements
+                            Implementations:
+                                ✅ HashSet, ✅ LinkedHashSet, ✅ TreeSet
+
+                        3 . Queue<E>
+                                FIFO (First-In-First-Out) or other orderings
+                                Used for scheduling tasks, buffering, etc.
+                            Implementations:
+                                ✅ PriorityQueue, ✅ ArrayDeque, ✅ LinkedList
+
+                        4 . Deque<E> (Double-Ended Queue)
+                                Insertion/removal at both ends
+                                Implements both Stack and Queue behavior
+                            Implementations:
+                                ✅ ArrayDeque
+
+                        5 . Map<K, V>
+                                Key-value pairs
+                                Keys must be unique
+                            Implementations:
+                                ✅ HashMap, ✅ LinkedHashMap, ✅ TreeMap, ✅ Hashtable, ✅ ConcurrentHashMap
+
+                Implementations: 
+                    Concrete classes implementing those interfaces
+                    EX - ArrayList, LinkedList, HashSet, TreeSet, HashMap, TreeMap
+                    common implementations - 
+                        1 . ArrayList
+                            Backed by array, fast random access
+                            Slow at inserts/removals in middle
+
+                        2 . LinkedList
+                            Doubly linked nodes
+                            Fast inserts/deletes, slow access
+
+                        3 . HashSet
+                            Uses HashMap internally
+                            Unordered, allows one null element
+
+                        4 . LinkedHashSet
+                            Maintains insertion order
+
+                        5 . TreeSet
+                            Sorted (natural order or comparator)
+                            Based on Red-Black Tree
+
+                        6 . HashMap
+                            Unordered, allows one null key
+                            Fast lookup/insertion
+
+                        7 . TreeMap
+                            Sorted keys
+                            No null key
+
+                        8 . LinkedHashMap
+                            Maintains insertion order
+                            Useful for caches (e.g. LRU)
+
+                    Collection Type	    Maintains Order	Allows Duplicates	Sorted	Thread Safe
+                    ArrayList	                ✅	            ✅	         ❌	    ❌
+                    LinkedList	                ✅	            ✅	         ❌	    ❌
+                    HashSet	                    ❌	            ❌	         ❌	    ❌
+                    TreeSet	                    ✅ (sorted)	    ❌	         ✅	    ❌
+                    HashMap	                    ❌	            ✅ (values)	 ❌	    ❌
+                    TreeMap	                    ✅ (sorted)	    ✅ (values)	 ✅	    ❌
+
+                Utilities: 
+                    Algorithms (like sorting, searching) that operate on collections
+                    Collections class with helper methods like sort(), reverse(), shuffle(), binarySearch()
+
+8.  Concurrency & Parallelism in Java
+        1. Core Definitions
+            Concurrency
+                Multiple tasks make progress at overlapping time periods (not necessarily simultaneously).
+                Example: A CPU switching between multiple threads (context switching).
+             Parallelism
+                Multiple tasks actually running simultaneously, typically on multiple processors/cores.
+                Example: Two threads executing on two cores at the same time.
+            Process
+                Independent, has its own memory space.
+                Heavyweight. Inter-process communication is complex.
+            Thread
+                Lightweight unit of a process.
+                Shares memory of the process.
+                Easier communication but risk of race conditions.
+        
+        2. Creating threads in java - 
+            1. Extending Thread class - 
+            ex - 
+                class MyThread extends Thread {
+                    public void run() {
+                        System.out.println("Thread running...");
+                    }
+                }
+                new MyThread().start();
+            2. Implementing Runnable class 
+            ex - 
+                class MyRunnable implements Runnable {
+                    public void run() {
+                        System.out.println("Runnable thread running...");
+                    }
+                }
+                new Thread(new MyRunnable()).start();
+            3. Using lambda expressions - 
+                new Thread(() -> System.out.println("Lambda thread")).start();
+        
+        3. Synchronization and its need in java
+            Problem: 
+                Race Conditions
+                Two or more threads accessing shared resources simultaneously, leading to inconsistent results.
+                ex of Concurrency issues - 
+                    Debugging Concurrency Issues
+                        Deadlock: Two threads wait for each other’s locks.
+                        Livelock: Threads keep changing state but make no progress.
+                        Starvation: A thread never gets access to required resources.
+            Solution: 
+                Synchronized Blocks/Methods
+                It is the mechanism that ensures only one thread can access a resource at a time, preventing race conditions.
+                Synchronization can also be acheived using Locks (ReentrantLock class)
+            ex - a method or a block can be synchronized - 
+                public synchronized void increment() {
+                    count++;
+                }
+                synchronized(this) {
+                    count++;
+                }
+            Locks (More control than synchronized)
+            ex - 
+                ReentrantLock lock = new ReentrantLock();
+                lock.lock();
+                try {
+                    // critical section
+                } finally {
+                    lock.unlock();
+                }
+        4. Thread Lifecycle
+            New             →   Thread object created
+            Runnable        →   start() is called
+            Running         →   Thread scheduler picks it
+            Waiting/Blocked →   Waiting for resources
+            Terminated      →   run() method exits
+
+        5. Thread Communication (wait/notify)
+            Used to coordinate execution between threads.
+            ex - 
+                synchronized(obj) {
+                    while (!condition) obj.wait();
+                    obj.notify(); // wakes one waiting thread
+                }
