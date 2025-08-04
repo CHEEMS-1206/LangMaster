@@ -1425,3 +1425,1103 @@ Programming fundamentals in java
                     while (!condition) obj.wait();
                     obj.notify(); // wakes one waiting thread
                 }
+
+9.  Input/Output (I/O) Operations
+            Java provides a powerful I/O system in the java.io, java.nio, and java.net packages to support a wide range of I/O functionalities.
+            Input/Output Types in Java
+                Type	            Examples	                            Notes
+                Byte Streams	    InputStream, OutputStream	            For binary data (images, files)
+                Character Streams	Reader, Writer	                        For text data (text files, console)
+                Buffered Streams	BufferedReader, BufferedWriter	        Improves performance
+                Object Streams	    ObjectInputStream, ObjectOutputStream	For serialization
+                File Streams	    FileInputStream, FileOutputStream	    For file byte I/O
+
+        Console I/O 
+            Input from users, printing outputs.
+            Console I/O is used for interacting with the user via the terminal/command line.
+            1.  Inputs can be read using -
+                System.io or System.BufferedReader streams.
+                Reading Input from Console
+                    1. Using Scanner (Most common way):
+
+                        import java.util.Scanner;
+                        Scanner sc = new Scanner(System.in);
+                        System.out.print("Enter your name: ");
+                        String name = sc.nextLine();
+                        System.out.println("Hello, " + name);\
+
+                    2. Using BufferedReader:
+                        
+                        import java.io.*;
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                        System.out.print("Enter age: ");
+                        int age = Integer.parseInt(reader.readLine());
+
+            2.  Outputs can be written using - 
+                System.out stream
+                Writing output to console - 
+                    1. Using out stream -
+
+                        System.out.println("This is a line");
+                        System.out.print("This is inline");
+                        System.out.printf("Formatted output: %d, %s", 10, "Java");
+
+        File Handling 
+            Reading and writing files.
+            File I/O deals with reading from and writing to files stored on the disk.
+
+            Key Classes:
+                File
+                FileReader, BufferedReader
+                FileWriter, BufferedWriter
+                PrintWriter
+                Files (from java.nio.file)
+                Scanner (for file input)
+            
+            1. Writing in files - 
+                1. using FileWriter - 
+                    import java.io.FileWriter;
+                    FileWriter writer = new FileWriter("output.txt");
+                    writer.write("This is a test file.\nJava File I/O.");
+                    writer.close();
+                2. using FileWriter as BufferedWriter -
+                    import java.io.*;
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+                    writer.write("Hello, Java!");
+                    writer.newLine();
+                    writer.write("File writing done.");
+                    writer.close();
+
+            2. Reading form files - 
+                1. using FileReader - 
+
+                2. using BufferedReader - 
+                    import java.io.BufferedReader;
+                    import java.io.FileReader;
+                    BufferedReader reader = new BufferedReader(new FileReader("output.txt"));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                    reader.close();
+            
+            3. Reading and writing in files using "java.nio"
+
+            4. best practices while dealing with files - 
+                .   Always close streams (close()) or use try-with-resources for auto-closing.
+                        try (BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {
+                            // Auto-close
+                        }
+                .   Prefer BufferedReader/Writer over FileReader/Writer for efficiency.
+                        Unbuffered	Reads/writes directly (slower)
+                        Buffered Uses internal buffer (faster)
+                .   Use nio files operations - 
+                        import java.nio.file.*;
+                        Path path = Paths.get("output.txt");
+                        List<String> lines = Files.readAllLines(path);
+                        Files.write(Paths.get ("newfile.txt"), Arrays.asList("Line 1", "Line 2"));
+                .   Use exception handling to deal with I/O errors.
+
+            5.  Key Differences: java.io vs java.nio
+                    Feature	        java.io	        java.nio
+                    Blocking	    Yes	            Non-blocking (NIO2)
+                    Channels	    No	            Yes
+                    Buffers	        No	            Yes (uses ByteBuffer, etc.)
+                    File Handling	Streams	        Channels + Buffers
+                    Suitable For	Simple I/O	    High-performance / scalable I/O
+
+        Network I/O 
+            Sending and receiving data over networks.
+            Sending and receiving data across networks using sockets, URLs, and HTTP.
+
+            Key Classes:
+                Socket, ServerSocket
+                DatagramSocket, DatagramPacket (UDP)
+                URLConnection, HttpURLConnection
+
+            1. creating client and server using sockets.
+                import java.net.*;
+                import java.io.*;
+
+                // server using socket 
+                ServerSocket serverSocket = new ServerSocket(5000);
+                Socket socket = serverSocket.accept(); // waits for client
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                String msg = in.readLine();
+                out.println("Received: " + msg);
+                socket.close();
+                serverSocket.close();
+
+                // client
+                Socket socket = new Socket("localhost", 5000);
+                BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                System.out.print("Enter message: ");
+                String msg = input.readLine();
+                out.println(msg);
+                socket.close();
+
+            *   Streams Hierarchy -   
+                        InputStream / Reader
+                                ↑
+                    FileInputStream / FileReader
+                                ↑
+                    BufferedInputStream / BufferedReader
+
+                        OutputStream / Writer
+                                ↑
+                    FileOutputStream / FileWriter
+                                ↑
+                    BufferedOutputStream / BufferedWriter
+
+10. String Manipulation
+        String classes in JAVA are implemented by Charsequence interface -
+            CharSequence (Interface)
+                String, StringBuilder, StringBuffer implement it.
+                Provides a common API for character sequences. 
+
+            Java has multiple classes for working with strings:
+                String (immutable)
+                    Immutable: Once created, cannot be modified.
+                    Stored in the String Pool if created as a literal.
+                    Thread-safe due to immutability.
+                    Best for constant or rarely modified text.
+                    case - 
+                        String s = "Hello";
+                        s = s + " World"; // Creates a new String object
+
+                StringBuilder (mutable, not thread-safe)
+                    Mutable, designed for heavy string modifications.
+                    Not thread-safe (no synchronization).
+                    Faster than StringBuffer because no lock overhead.
+                    Ideal for single-threaded use cases.
+                    case - 
+                        StringBuilder sb = new StringBuilder("Hello");
+                        sb.append(" World"); // Modifies same object
+
+                StringBuffer (mutable, thread-safe)
+                    Mutable and thread-safe (all methods synchronized).
+                    Slightly slower due to synchronization.
+                    Good for multi-threaded programs that modify strings.
+                    case - 
+                        StringBuffer sbf = new StringBuffer("Hello");
+                        sbf.append(" World");
+
+                Feature	        String	                    StringBuilder	                        StringBuffer
+                Mutability	    Immutable	                Mutable	                                Mutable
+                Thread-Safety	Safe due to immutability	Not thread-safe	                        Thread-safe (synchronized)
+                Performance	    Slow for modifications	    Fast (no sync)	                        Slower (sync overhead)
+                Use Case	    Constant/fixed text	        Heavy modifications in single-thread	Heavy modifications in multi-thread
+                Package	        java.lang	                java.lang	                            java.lang
+                Implements	    CharSequence	            CharSequence	                        CharSequence
+
+                When to Use Each
+                    String: When the content doesn’t change frequently. Good for constants, keys, fixed text.
+                    StringBuilder: When you need to build/modify strings frequently in a single-threaded context.
+                    StringBuffer: When you need to build/modify strings frequently in a multi-threaded context.
+        
+        String Operations 
+            String Operations:
+                Creation & Initialization
+                    Creating from literals:
+                        String s = "Hello";
+                    Using new:
+                        String s = new String("Hello");
+                    From char array:
+                        char[] arr = {'J','a','v','a'};
+                        String s = new String(arr);
+
+                Concatenation - it can be acheived by 
+                    + operator
+                    concat() method
+                    StringBuilder.append() / StringBuffer.append()
+
+                Access (charAt, toCharArray)
+                    charAt(int index)
+                    toCharArray()
+                    codePointAt(index) for Unicode code points.
+
+                Substring extraction (slicing) 
+                    substring(beginIndex)
+                    substring(beginIndex, endIndex)
+
+                Search (indexOf, contains, startsWith, endsWith)
+                    indexOf(char/String)
+                    lastIndexOf(char/String)
+                    contains(CharSequence)
+                    startsWith(prefix)
+                    endsWith(suffix)
+                    matches(regex)
+
+                Replace & Modify (replace, toUpperCase, trim)
+                    replace(oldChar, newChar)
+                    replaceAll(regex, replacement)
+                    replaceFirst(regex, replacement)
+                    toUpperCase()
+                    toLowerCase()
+                    trim() (remove leading/trailing spaces)
+                    strip(), stripLeading(), stripTrailing() (Java 11+)
+                    repeat(n) (Java 11+)
+                    intern() (put into string pool)
+
+                Split & Join
+                    split(regex)
+                    String.join(delimiter, elements)
+                    Using StringJoiner : 
+                        Used to build delimited strings efficiently.
+                        Case - 
+                            StringJoiner joiner = new StringJoiner(", ");
+                            joiner.add("A").add("B").add("C");
+                            System.out.println(joiner.toString()); // A, B, C
+
+                Compare (equals, compareTo)
+                    equals()
+                    equalsIgnoreCase()
+                    compareTo()
+                    compareToIgnoreCase()
+                    regionMatches()
+                    contentEquals()
+
+                Length & Empty Checks
+                    length()
+                    isEmpty()
+                    isBlank() (Java 11+)
+
+                Conversion (to bytes, chars)
+                    getBytes() (to byte array)
+                    toCharArray() (to char array)
+                    valueOf() (static method to convert primitives to String)
+                    format() (formatted strings, like printf)
+
+                Mutable operations (StringBuilder, StringBuffer)
+                    append()
+                    insert(offset, str)
+                    delete(start, end)
+                    deleteCharAt(index)
+                    reverse()
+                    replace(start, end, str)
+                    capacity(), ensureCapacity()
+                    setLength()
+
+                Advanced trimming/stripping
+                Regex-based pattern matching (matches(), Pattern, Matcher)
+                    Joining streams of strings:
+                        using .join() method
+                        using .format()
+                        Regex-based pattern matching (matches(), Pattern, Matcher)
+
+        Regular Expressions 
+            A regex is a pattern used for matching and manipulating text.
+            This can be used in -
+                Classes Used:
+                    Pattern
+                    Matcher
+                Methods Used:
+                    String methods like matches(), replaceAll(), split()
+            
+            Example: Simple Match
+                import java.util.regex.*;
+                String text = "abc123";
+                boolean match = text.matches("[a-z]+\\d+");
+                System.out.println(match);   // true
+            
+            Example: Find & Extract Patterns
+                import java.util.regex.*;
+                Pattern pattern = Pattern.compile("\\d+");     // one or more digits
+                Matcher matcher = pattern.matcher("Order1234 ready");
+                while (matcher.find()) {
+                    System.out.println(matcher.group());       // prints 1234
+                }
+
+            Example: Replace Using Regex
+                String text = "Price: $100";
+                String result = text.replaceAll("\\$\\d+", "$200");
+                System.out.println(result);    // Price: $200
+
+            Useful Regex Patterns:
+                \\d → digits
+                \\w → word characters
+                . → any character
+                * → 0 or more
+                + → 1 or more
+                ? → optional
+                [abc] → a OR b OR c
+                [^abc] → NOT a OR b OR c
+
+11. Modular Programming & Code Organization
+        Modular Programming & Code Organization is a software development approach where a program is divided into independent, self-contained units (modules) that can be developed, tested, maintained, and reused separately.
+        Modular Programming is the process of breaking a large application into smaller, manageable, reusable pieces (modules), each responsible for a specific functionality.
+        In Java, this is achieved using:
+            Packages (grouping related classes and interfaces)
+            Modules (Java 9+) (a higher-level grouping of packages)
+            Interfaces & Classes (encapsulation of code logic)
+        
+        Code Organization is about structuring source code in a way that is easy to navigate, maintain, and scale.
+        In Java, this is achieved using:
+            Packages organize classes and avoid naming conflicts.
+            Modules control what code is exposed to other parts of the program.
+            Dependency management tools (Maven, Gradle) organize external libraries.
+
+        Namespaces & Packages 
+            Prevent naming conflicts (Java packages).
+            What is a Package?
+                A namespace that groups related classes, interfaces, and sub-packages.
+                Helps avoid naming conflicts and organize large projects.
+                Java uses the package keyword.
+
+                Creating a Package:
+                    package com.example.utils;
+                    public class MyUtils {
+                        public static void sayHello() {
+                            System.out.println("Hello!");
+                        }
+                    }
+                Using a Package:
+                    import com.example.utils.MyUtils;
+                    public class Test {
+                        public static void main(String[] args) {
+                            MyUtils.sayHello();
+                        }
+                    }
+
+                Key Points:
+                    Package names are usually lowercase.
+                    Follow reverse domain naming convention (com.company.project).
+                    java.* and javax.* are standard library packages.
+
+        Modules & Imports for Reusing code across files.
+            Modules (Java 9+)
+                A higher-level way of organizing code compared to packages.
+                A module is a collection of packages + a module-info.java file that defines what is exposed.
+
+                Example Structure:
+                    src/
+                    └─ moduleA/
+                        ├─ module-info.java
+                        └─ com/example/utils/MyUtils.java
+                    module-info.java
+                    module moduleA {
+                        exports com.example.utils;
+                    }
+                Using Modules:
+                    Another module must requires moduleA in its module-info.java.
+
+            Imports
+                Used to access classes from other packages or modules.
+
+            Syntax:
+                import java.util.List;        // Single class
+                import java.util.*;           // Wildcard
+                import static java.lang.Math.*; // Static imports
+
+        Dependency Management 
+            Handling third-party libraries (Maven, Gradle).
+            Managing third-party libraries and their versions so they integrate into your project automatically.
+            
+            🔹 Maven - xml based:
+                Uses pom.xml
+                Example:
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-core</artifactId>
+                            <version>5.3.30</version>
+                        </dependency>
+                    </dependencies>
+            🔹 Gradle - modern syntax:
+                Uses build.gradle
+                Example:
+                    dependencies {
+                        implementation 'org.springframework:spring-core:5.3.30'
+                    }
+
+            Differences between Maven and Gradle - 
+            Feature	            Maven	                                Gradle
+            Configuration	    Declarative (XML - pom.xml)	            Declarative + Scriptable (Groovy/Kotlin DSL)
+            Flexibility	        Fixed lifecycle and conventions	        Highly customizable build logic
+            Performance	        Slower, no build caching	            Faster due to incremental builds and caching
+            Learning Curve	    Easier (convention over configuration)	Slightly steeper (scripting required)
+            Dependency Mgmt	    Uses Maven Central (default repo)	    Uses Maven & Ivy repositories
+            Supported Langs	    Mainly Java/JVM	                        Java, Kotlin, Scala, Android, even C/C++
+
+12. Advanced Language Features
+        Generics & Templates – 
+            Code reusability with type safety.
+            In java we have gnerics to acheive Code reusability with type safety. Like in c++ we have Templates
+
+            Generics - 
+                Generics allow classes, interfaces, and methods to be parameterized with types.
+                Instead of writing separate code for each data type, you create one generic version that works with any type, while ensuring compile-time type safety.
+                Why generics - 
+                    Type Safety: Errors are caught at compile-time.
+                    Code Reusability: Same class/method works for any type.
+                    No Casting: Eliminates manual type casting when using collections.
+                    Consistency: Works seamlessly with Java Collections Framework (e.g., List<T>).
+                
+                EX of a generic class - 
+                    class Box<T> {            // T is a type parameter
+                        private T value;
+                        public void set(T value) { this.value = value; }
+                        public T get() { return value; }
+                    }
+                    public class Main {
+                        public static void main(String[] args) {
+                            Box<String> strBox = new Box<>();
+                            strBox.set("Java");
+                            System.out.println(strBox.get());
+                            Box<Integer> intBox = new Box<>();
+                            intBox.set(100);
+                            System.out.println(intBox.get());
+                        }
+                    }
+                    here - 
+                        T is a placeholder type. It can be any reference type.
+                        When you create an object, you specify the type (Box<String>).
+                        The compiler enforces that type everywhere inside the generic class.
+                EX of a generic method -
+                    public class Utils {
+                        public static <T> void printArray(T[] arr) {
+                            for (T item : arr) System.out.println(item);
+                        }
+                    }
+                    public class Test {
+                        public static void main(String[] args) {
+                            String[] names = {"Alice", "Bob"};
+                            Integer[] nums = {1, 2, 3};
+                            Utils.printArray(names);
+                            Utils.printArray(nums);
+                        }
+                    }
+                Ex of multiple type params -
+                    class Pair<K, V> {
+                        private K key;
+                        private V value;
+                        public Pair(K key, V value) { this.key = key; this.value = value; }
+                        public K getKey() { return key; }
+                        public V getValue() { return value; }
+                    }
+                    Pair<String, Integer> p = new Pair<>("Age", 25);
+
+                Bounded Generics - 
+                    You can restrict types with extends or super.
+                    Upper Bound (Only Number and subtypes):
+                        class Calculator<T extends Number> {
+                            public double add(T a, T b) {
+                                return a.doubleValue() + b.doubleValue();
+                            }
+                        }
+                    Lower Bound (Only superclasses):
+                        public <T super Integer> void process(List<T> list) { }
+
+                Wildcards (?)
+                    Used when you don’t know the exact type parameter at compile time.
+                        Unbounded Wildcard: List<?> – accepts any type.
+                        Upper Bound: List<? extends Number>
+                        Lower Bound: List<? super Integer>
+                        void printList(List<?> list) {
+                            for (Object obj : list) System.out.println(obj);
+                        }
+                Type Erasure
+                    Generics exist only at compile time.
+                    The JVM erases type parameters and replaces them with raw types or bounds.
+                    This is why List<String> and List<Integer> are both just List at runtime.
+                    when collections not defined as generics at runtime they are defined with object
+                        runtime -> compiletime
+                        List<t> -> List<int> 
+                        List<Object> -> List<int>
+                    Compiler perform erasure first and that replaces them with raw types or bounds.
+                
+                Limitations of Generics
+                    Cannot use primitive types directly (List<int> ❌). Use wrapper classes (Integer).
+                    Cannot create instances of type parameter (new T() ❌).
+                    Cannot use static with type parameters in a generic class.
+
+        Lambda Functions & Closures – 
+            Anonymous function expressions.
+            What are Lambdas?
+                Anonymous functions introduced in Java 8.
+                Allow writing compact implementations of functional interfaces (interfaces with a single abstract method).
+                They are used primarily with Functional Interfaces (interfaces with exactly one abstract method, e.g., Runnable, Comparator).
+
+                🔸 Syntax:
+                    (parameters) -> expression
+                    (parameters) -> { statements }
+                🔸 Example:
+                    import java.util.*;
+                    public class LambdaExample {
+                        public static void main(String[] args) {
+                            List<String> list = Arrays.asList("Java", "Python", "C++");
+                            // Using Lambda
+                            list.forEach(item -> System.out.println(item));
+                            // Sorting with Lambda
+                            list.sort((a, b) -> b.compareTo(a));
+                            System.out.println(list);
+                        }
+                    }
+                Example without lambda - 
+                    List<String> list = Arrays.asList("Java", "Python", "C++");
+                    list.forEach(new Consumer<String>() {
+                        public void accept(String s) {
+                            System.out.println(s);
+                        }
+                    });
+
+                example with lambda - 
+                    list.forEach(s -> System.out.println(s));
+            
+            Closures - 
+                A Closure is a function that captures variables from its surrounding lexical scope.
+                In Java, Lambda Expressions can act as closures.
+                Captured variables must be final or effectively final (value doesn’t change after initialization).
+            EX - 
+                public class ClosureDemo {
+                    public static void main(String[] args) {
+                        String greeting = "Hello ";  // effectively final
+
+                        Runnable r = () -> System.out.println(greeting + "World");
+                        new Thread(r).start();
+                    }
+                }
+                Here, the lambda captures the variable greeting from outside its scope.
+                This is what makes it a closure.
+
+                Why must variables be final/effectively final in closures?
+                    Lambdas and anonymous classes are executed later, possibly in another thread.
+                    Ensures the captured variable does not change unexpectedly, maintaining consistent behavior.
+
+        Functional Programming Constructs – 
+            First-class functions, immutability, pattern matching.
+            
+            What does First-Class Functions mean?
+                In Functional Programming, functions are treated like values:
+                    Can be assigned to variables
+                    Can be passed as arguments
+                    Can be returned from methods
+                Java doesn't have standalone functions; everything is inside classes.
+                But with Lambda Expressions and Method References (Java 8+), Java can simulate first-class functions using Functional Interfaces.
+                🔸 Example: Passing Functions
+                    import java.util.function.Function;
+
+                    public class FirstClassFunctionDemo {
+                        public static void main(String[] args) {
+                            Function<Integer, Integer> square = x -> x * x;  // function as value
+
+                            System.out.println(applyFunction(5, square)); // 25
+                        }
+
+                        static int applyFunction(int n, Function<Integer, Integer> func) {
+                            return func.apply(n);  // passing function as argument
+                        }
+                    }
+                🔹 Returning Functions
+                    Function<Integer, Integer> multiplyBy(int factor) {
+                        return x -> x * factor;  // returns a lambda (closure)
+                    }
+                Takeaway: Lambdas + Functional Interfaces = First-class function behavior in Java.
+
+            Immutability - 
+                Once an object is created, its state cannot change.
+                Reduces bugs in concurrent/multi-threaded environments.
+
+                🔹 In Java:
+                    String is immutable.
+                    Use final for variables to prevent reassignment.
+                    Use libraries like Collections.unmodifiableList() for immutable collections.
+                    Records (Java 14+) are inherently immutable.
+                benefits - 
+                    Thread safety.
+                    Predictable behavior in functional programming.
+
+            Pattern Matching - 
+                A feature that allows you to test and extract values from objects based on their type/structure in a more concise way.
+                Common in FP languages (Scala, Haskell).
+                Java 16+ introduced pattern matching for instanceof.
+                EX
+                🔸 Before Pattern Matching
+                    Object obj = "Java";
+                    if (obj instanceof String) {
+                        String s = (String) obj;   // explicit cast required
+                        System.out.println(s.toUpperCase());
+                    }
+                🔸 With Pattern Matching (Java 16+)
+                    Object obj = "Java";
+                    if (obj instanceof String s) {
+                        System.out.println(s.toUpperCase()); // no cast, auto binds
+                    }
+                🔹 Switch Pattern Matching (Java 17+ Preview)
+                    static String typeOf(Object o) {
+                        return switch (o) {
+                            case String s    -> "String of length " + s.length();
+                            case Integer i   -> "Integer with value " + i;
+                            case null        -> "Null value";
+                            default          -> "Unknown";
+                        };
+                    }
+
+            Summary
+                First-Class Functions: Treat functions as values using lambdas and functional interfaces. Enables higher-order programming.
+                Immutability: Prevents changes to state; key to thread safety and functional style.
+                Pattern Matching: Concise type checks and deconstruction of objects; reduces boilerplate in instanceof and switch.
+
+13.  Compilation & Interpretation
+        Compiled vs Interpreted Execution
+            ✅ Compiled Languages:
+            Entire code is translated into machine code before execution.
+            Produces a binary executable.
+            Faster execution, but platform-specific.
+            Examples: C, C++
+
+            ✅ Interpreted Languages:
+            Code is read and executed line-by-line at runtime.
+            Slower, but platform-independent.
+            Examples: Python, JavaScript
+
+        JAVA - 
+            Java is neither purely compiled nor purely interpreted, it uses a hybrid model:
+            Java source code (.java) is compiled into bytecode (.class) by the javac compiler.
+            Bytecode is platform-independent.
+            The JVM (Java Virtual Machine) loads and interprets the bytecode.
+            The JIT (Just-In-Time) Compiler compiles frequently executed bytecode into native machine code at runtime for speed.
+            hence java is Write Once, Run Anywhere because bytecode is portable.
+            JIT gives near-native performance after "warming up"
+
+            Java execution steps - 
+                Java Source Code (.java)
+                        |
+                        v
+                Bytecode (.class)  <-- Compiled by javac
+                        |
+                        v
+                JVM Interpreter + JIT Compiler --> Native Machine Code
+
+        Just-in-Time (JIT) Compilation 
+            A component of the JVM that monitors code at runtime.
+            Frequently used "hot" bytecode sections are compiled into native machine code.
+            Caches compiled native code for reuse, improving performance.
+            Advantages :
+                Platform-independent bytecode + native-level performance.
+                Optimizes based on actual runtime behavior (profiling).
+                Eliminates unused code paths with dead code elimination.
+
+            Aspect	            Compiled Languages (C++)            Interpreted Languages (Python)	        Java (Hybrid)
+            Execution           Speed	Fast (machine code)	        Slower (line-by-line)	                Fast (JIT-compiled)
+            Portability	        Platform-dependent	                Platform-independent	                Platform-independent (JVM)
+            Compilation Stage	Before execution	                During execution	                    Before + During (Hybrid)
+
+        A diagram of the full Java compilation and execution pipeline, including memory and JIT stages:
+            +--------------------+
+            |  Java Source Code  |   <-- .java files
+            +--------------------+
+                    |
+                    v  (javac compiler)
+            +--------------------+
+            |   Java Bytecode    |   <-- .class files
+            +--------------------+
+                    |
+                    v  (Class Loader)
+            +--------------------+
+            |  JVM (Runtime)     |
+            |  - Class Loader    |
+            |  - Bytecode Verifier
+            +--------------------+
+                    |
+                    v
+            +--------------------+
+            |  Execution Engine  |
+            |  - Interpreter     |
+            |  - JIT Compiler    |  <-- converts hot bytecode to native code
+            +--------------------+
+                    |
+                    v
+            +--------------------+
+            | Native Machine Code|
+            +--------------------+
+                    |
+                    v
+            Runs on OS + Hardware
+
+            🔹 Memory Areas Involved in JVM Execution:
+                Method Area: Class-level data, static variables, runtime constant pool.
+                Heap: Objects, instance variables.
+                Stack: Method calls, local variables, primitive values.
+                PC Register: Keeps track of executing instruction in each thread.
+                Native Method Stack: For native (non-Java) method calls.
+
+            🔹 Flow Summary:
+                .java → Compiled → .class (Bytecode).
+                Bytecode loaded by JVM Class Loader.
+                Bytecode verified for safety.
+                Interpreter runs bytecode line by line initially.
+                JIT Compiler identifies “hot” methods and compiles them into native machine code for faster execution.
+                Native code is cached and executed directly.
+
+14. Meta-Programming & Reflection
+        Runtime Type Information (RTTI) - Checking types at runtime.
+        ✅ What is RTTI in Java?
+            RTTI lets you inspect the type of an object at runtime.
+            Useful when the exact type is unknown during compile-time.
+            🔸 Key Operators/Methods:
+                instanceof – Check if an object is of a certain type.
+                getClass() – Returns the runtime class of an object.
+                Class<?> – Represents a class at runtime.
+            Ex 
+                Object obj = "Hello";
+                if (obj instanceof String) {
+                    System.out.println("It's a String");
+                }
+                System.out.println("Class: " + obj.getClass().getName());
+
+        Reflection - Inspecting and modifying code structure dynamically.
+        Reflection is a powerful runtime API that allows a Java program to:
+            Inspect classes, interfaces, fields, and methods at runtime.
+            Instantiate objects dynamically.
+            Access and modify fields/methods (even private ones).
+            Invoke methods without knowing their names at compile time.
+            Part of java.lang.reflect package.  
+            Key Classes: Class, Field, Method, Constructor, Modifier
+
+            🔹 How Reflection Works
+                Every loaded class in Java is represented by a Class<?> object.
+                Using this Class object, you can get metadata about the class (fields, methods, constructors).
+                You can also create objects, invoke methods, or modify fields dynamically.
+
+            Getting class info at runtime - 
+                Class<?> clazz = Class.forName("java.util.ArrayList");
+                System.out.println("Class: " + clazz.getName());
+                for (Method m : clazz.getDeclaredMethods()) {
+                    System.out.println("Method: " + m.getName());
+                }
+
+            Accesing Fields and methods dynamically - 
+                import java.lang.reflect.*;
+                class Person {
+                    private String name = "John";
+                }
+                public class ReflectDemo {
+                    public static void main(String[] args) throws Exception {
+                        Person p = new Person();
+
+                        Field field = p.getClass().getDeclaredField("name");
+                        field.setAccessible(true);
+                        System.out.println("Original: " + field.get(p));
+
+                        field.set(p, "Alice");
+                        System.out.println("Modified: " + field.get(p));
+                    }
+                }
+            
+            Capabilities:
+                Load classes dynamically.
+                Instantiate objects at runtime.
+                Access private members.
+                Invoke methods without knowing them at compile-time.
+
+            ✅ Use Cases:
+                Dependency Injection (Spring, Guice).
+                ORMs (Hibernate uses reflection to map fields).
+                Testing frameworks (JUnit).
+                Serialization libraries.
+            ⚠️ Caution:
+                Slower than direct method calls.
+                Can break encapsulation.
+                Requires security permissions in restricted environments.
+
+        Macros & Preprocessors 
+        Java does NOT have macros or preprocessors like C/C++.
+        Java relies on:
+            Annotations (metadata processed at compile/runtime).
+            Annotation Processors (code generation at compile-time).
+            Reflection + Annotations for runtime behavior changes.
+
+15. Serialization & deserialization
+        What is Serialization?
+        Serialization = Converting an object's state into a byte stream so it can be:
+            Stored on disk (file, database)
+            Transferred over a network
+            Cached in memory
+            Saving application state.
+            Sending objects over sockets in network programming.
+            Storing objects in distributed caches (e.g., Redis).
+            Remote Method Invocation (RMI).
+        Deserialization = Converting the byte stream back into an object.
+        ✅ Key Package: java.io
+        ✅ Marker Interface: java.io.Serializable
+
+        Serialization : 
+            import java.io.*;
+            class Person implements Serializable {
+                private static final long serialVersionUID = 1L;
+                String name;
+                int age;
+
+                Person(String name, int age) {
+                    this.name = name;
+                    this.age = age;
+                }
+            }
+            public class SerializeDemo {
+                public static void main(String[] args) {
+                    Person p = new Person("Alice", 25);
+
+                    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.ser"))) {
+                        oos.writeObject(p);
+                        System.out.println("Object Serialized!");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        Deserialization : 
+            import java.io.*;
+            public class DeserializeDemo {
+                public static void main(String[] args) {
+                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("person.ser"))) {
+                        Person p = (Person) ois.readObject();
+                        System.out.println("Name: " + p.name + ", Age: " + p.age);
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        ✅ Special Points:
+            serialVersionUID: Unique ID for class versioning during deserialization.
+            transient keyword: Fields marked transient are not serialized.
+            Static fields are not serialized (belong to class, not object).
+
+        Data Encoding Formats
+            When sending/storing data, objects can be encoded into different formats:
+            like - JSON, XML, Excel etc
+
+16. Security Features
+        Access Modifiers 
+            public, private, protected. (extensively studied in module 5)
+        Authentication & Encryption Libraries 
+            Secure communication. (ETC)
+
+17. Low-Level & System Programming Features
+        Bitwise Operations 
+        Java supports full bitwise operations on integral types (byte, short, int, long, char).
+        ✅ Operators:
+            AND (&) – Bitwise AND
+            OR (|) – Bitwise OR
+            XOR (^) – Bitwise exclusive OR
+            NOT (~) – Bitwise complement
+            Left Shift (<<) – Shifts bits left (fills with 0)
+            Right Shift (>>) – Arithmetic right shift (sign bit preserved)
+            Unsigned Right Shift (>>>) – Logical right shift (fills with 0)
+
+        Inline Assembly Support - allow embedding assembly.
+            Java does NOT support inline assembly or direct hardware instructions.
+            Reason: Java is designed for portability and safety, running inside the JVM sandbox.
+            ✅ Alternative:
+                Use JNI (Java Native Interface) to call C/C++ code that includes inline assembly.
+                Use JNA (Java Native Access) for native system calls without writing JNI boilerplate.
+        
+        Hardware Interaction 
+            Java does not allow direct memory access or hardware interrupts (unlike C/C++).
+            All memory management is handled by the JVM.
+            ✅ How Java interacts with hardware:
+                Through OS APIs (via JNI/JNA).
+                For device drivers or low-level system programming, you need C/C++ or Rust.
+                Java is commonly used for application-level programming, not kernel-level.
+
+18. Web & GUI Programming Support
+        Web API Integration 
+            HTTP clients, WebSockets.
+        GUI Development 
+            Native UI toolkits (Qt, Swing, Tkinter).
+        Template Engines & Frontend Bindings – 
+            JSX (React), Handlebars, Blade. 
+            ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+            | | | | | | | | | | | | | |
+!-------------------(FUTURE SCOPE)-------------------!
+
+19. Standard Libraries & Ecosystem
+        Comprehensive Standard Library  
+            Java comes with a very rich standard library (java.*, javax.*) that covers most core functionalities without external dependencies.
+            ✅ Major Components:
+                java.lang – Core classes (String, Math, Object, Thread).
+                java.util – Collections Framework (List, Set, Map), utilities, dates.
+                java.io / java.nio – File I/O, streams, buffers.
+                java.net – Networking, sockets, HTTP.
+                java.sql – Database access (JDBC).
+                java.time – Modern date/time API (Java 8+).
+                java.security / javax.crypto – Cryptography and security.
+                java.util.concurrent – Concurrency utilities.
+
+        Tooling Support 
+            Java has excellent tools for building, testing, and packaging applications:
+            ✅ Build Systems:
+                Maven: XML-based dependency management and build tool.
+                Gradle: Flexible, Groovy/Kotlin-based build scripts; faster and more customizable.
+                Ant: Older build system, now largely replaced by Maven/Gradle.
+            ✅ Testing:
+                JUnit (unit testing)
+                TestNG (advanced testing)
+            ✅ Profilers & Debuggers:
+                JVisualVM, Java Flight Recorder, Mission Control.
+            ✅ IDEs with tooling support:
+                IntelliJ IDEA, Eclipse, NetBeans.
+
+        Package Management 
+            Java uses centralized repositories for dependencies:
+            ✅ Maven Central:
+                The default repository for most Java libraries.
+                Managed via Maven or Gradle.
+            ✅ Other Repos:
+                JCenter (deprecated but still in use).
+                Private repos via Nexus or Artifactory.
+
+            ✅ How it works:
+                Define dependencies in pom.xml (Maven) or build.gradle (Gradle).
+                The build tool fetches required JARs automatically from central repositories.
+
+20. Networking & Asynchronous Programming
+        Asynchronous Execution – 
+            Code execution where a task starts and does not block the main thread while waiting for it to finish.
+            Other tasks continue running, and the result is handled when ready (via callback, future, or promise).
+            In Java, asynchronous functionality can be achieved in multiple ways, depending on the requirements, Java version, and abstraction level. 
+            🔸 How Java Implements Asynchronous Execution:  
+                🔹 1. Using Thread Class (Low-level)
+                ➤ Suitable For:
+                    Basic concurrency needs.
+                    Lightweight async tasks.
+                    Code - 
+                        new Thread(() -> {
+                            System.out.println("Running asynchronously");
+                        }).start();
+                    
+                🔹 2. Using Runnable or Callable with ExecutorService
+                ➤ Benefits:
+                    Thread pooling.
+                    Manages thread lifecycle efficiently.
+                    Code - 
+                        ✅ Runnable (no result returned)
+                            ExecutorService executor = Executors.newSingleThreadExecutor();
+                            executor.execute(() -> System.out.println("Async Runnable Task"));
+                            executor.shutdown();
+                        
+                        ✅ Callable (returns result via Future)
+                            ExecutorService executor = Executors.newFixedThreadPool(2);
+                            Callable<String> task = () -> {
+                                Thread.sleep(1000);
+                                return "Async Result";
+                            };
+                            Future<String> future = executor.submit(task);
+                            System.out.println(future.get());  // Blocks until result is available
+                            executor.shutdown();
+
+                🔹 3. Using CompletableFuture (Java 8+)
+                ➤ Benefits:
+                    Non-blocking chaining of tasks.
+                    Exception handling and combining multiple async tasks.
+                    Code - 
+                        CompletableFuture.supplyAsync(() -> "Hello")
+                            .thenApply(result -> result + " World")
+                            .thenAccept(System.out::println);
+
+                    🔸 Example with Exception Handling:
+                        CompletableFuture.supplyAsync(() -> {
+                            if (true) throw new RuntimeException("Error");
+                            return "Result";
+                        }).exceptionally(ex -> "Fallback Result")
+                        .thenAccept(System.out::println);
+
+                🔹 4. Using ScheduledExecutorService (Delayed / Periodic Tasks)
+                    Code - 
+                        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+                        scheduler.schedule(() -> System.out.println("Executed after delay"),2, TimeUnit.SECONDS);
+                    
+                🔹 5. Using ForkJoinPool (Java 7+)
+                ➤ Best For:
+                    Parallelizable recursive tasks (divide and conquer).
+                    Built-in work-stealing.
+                    Code - 
+                        ForkJoinPool pool = new ForkJoinPool();
+                        pool.submit(() -> {
+                            // parallelStream internally uses ForkJoinPool
+                            List.of(1, 2, 3, 4).parallelStream().forEach(System.out::println);
+                        });
+
+                🔹 6. Asynchronous I/O (Java NIO & Asynchronous Channels)
+                    Code - 
+                        ✅ Java NIO: Event-based async networking.
+                            Selector selector = Selector.open();  // Event loop
+                            // Register non-blocking socket channels
+                        ✅ AsynchronousSocketChannel:
+                            AsynchronousSocketChannel channel = AsynchronousSocketChannel.open();
+                            channel.connect(new InetSocketAddress("localhost", 5000), null,
+                                new CompletionHandler<Void, Void>() {
+                                    public void completed(Void result, Void attachment) {
+                                        System.out.println("Connected asynchronously");
+                                    }
+                                    public void failed(Throwable exc, Void attachment) {
+                                        exc.printStackTrace();
+                                    }
+                            });
+
+                🔹 7. Reactive Programming (Project Reactor / RxJava)
+                ➤ Suitable For:
+                    Asynchronous streams of data.
+                    Non-blocking backpressure-aware pipelines.
+                    Code - 
+                        Mono.just("Hello")
+                            .map(str -> str + " Reactive")
+                            .subscribe(System.out::println);
+
+                🔹 8. Virtual Threads (Project Loom - Java 21+)
+                ➤ Light-weight alternative to OS threads.
+                ➤ Ideal for high-concurrency apps (e.g., millions of tasks).
+                Code -
+                    Thread.startVirtualThread(() -> {
+                        System.out.println("Running on a virtual thread");
+                    });
+
+                🔹 9. Using External Libraries
+                ➤ Libraries with built-in async support:
+                    Akka: Actor-based async.
+                    Vert.x: Event-loop-based async.
+                    Netty: High-performance async networking.
+                    Quarkus/Micronaut: Reactive Java frameworks.
+
+                ✅ Summary Table
+                    Approach	                        Return Type	Blocking?	         Suitable For
+                    Thread	                            void	                         No	Simple async task
+                    ExecutorService + Runnable	        void	                         No	Thread pool management
+                    ExecutorService + Callable	        Future<T>	                     Yes	Return value via Future
+                    CompletableFuture	                CompletableFuture	             No	Chained async with exception handling
+                    ScheduledExecutorService	        void	                         No	Delayed / periodic tasks
+                    ForkJoinPool	                    void / result	                 No	Parallel computations
+                    Java NIO / Async Channels	        N/A	No	                         High-performance networking
+                    Reactive Libraries (RxJava)	        Observable/Flowable	             No	Event streams, data pipelines
+                    Virtual Threads (Java 21+)	        void	                         No	Massive concurrency without blocking 
+
+                ✅ Key Points:
+                    Java doesn’t have async/await keywords like JS/Python.
+                    Uses CompletableFuture and reactive frameworks for async style.
+        
+        Event Loop & Callbacks – 
+        Event loops in java - 
+            An event loop waits for events (I/O, timers) and dispatches callbacks when they occur.
+            Common in Node.js and GUI frameworks.
+            Java does not have a built-in event loop like Node.js.
+            Netty (network framework) and Java NIO implement event-driven, non-blocking I/O.
+        Callbacks in java - 
+            Java uses interfaces, lambdas, and functional interfaces for callbacks.
+            Ex-
+                interface Callback {
+                    void onComplete(String result);
+                }
+                class Worker {
+                    void doWork(Callback cb) {
+                        new Thread(() -> cb.onComplete("Task Finished")).start();
+                    }
+                }
+                public class CallbackDemo {
+                    public static void main(String[] args) {
+                        new Worker().doWork(result -> System.out.println(result));
+                    }
+                }
