@@ -161,7 +161,7 @@
         Package Management 
             Centralized repositories (npm, pip, Cargo).
 
-19. Networking & Asynchronous Programming
+20. Networking & Asynchronous Programming
         Asynchronous Execution – 
             Async/Await (JavaScript, Python, Rust).
         Event Loop & Callbacks – 
