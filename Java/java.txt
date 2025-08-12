@@ -2710,3 +2710,74 @@ __________________ SPRING MVC & SPRING BOOT __________________
     │               │   └── UserServiceTest.java
     │               └── dao/
     │                   └── UserRepositoryTest.java
+
+
+-> Example project structure - 
+    pizza-app/
+    │
+    ├── pom.xml
+    │
+    └── src/
+        ├── main/
+        │   ├── java/
+        │   │   └── com/example/pizzaapp/
+        │   │       │
+        │   │       ├── PizzaAppApplication.java       # Spring Boot entry point
+        │   │
+        │   │       ├── config/                        # Configuration classes
+        │   │       │   ├── WebConfig.java
+        │   │       │   ├── SecurityConfig.java         # Spring Security setup
+        │   │       │   └── DatabaseConfig.java         # (Optional) DB-specific config
+        │   │
+        │   │       ├── controller/                    # Presentation layer
+        │   │       │   ├── PizzaController.java
+        │   │       │   └── AuthController.java
+        │   │
+        │   │       ├── service/                       # Business logic
+        │   │       │   ├── PizzaService.java
+        │   │       │   ├── UserService.java
+        │   │       │   └── impl/
+        │   │       │       ├── PizzaServiceImpl.java
+        │   │       │       └── UserServiceImpl.java
+        │   │
+        │   │       ├── dao/                           # Data access layer
+        │   │       │   ├── PizzaRepository.java
+        │   │       │   └── UserRepository.java
+        │   │
+        │   │       ├── entity/                        # JPA entities
+        │   │       │   ├── Pizza.java
+        │   │       │   └── User.java
+        │   │
+        │   │       ├── dto/                           # Data Transfer Objects
+        │   │       │   ├── PizzaDTO.java
+        │   │       │   ├── UserDTO.java
+        │   │       │   ├── LoginRequest.java
+        │   │       │   └── AuthResponse.java
+        │   │
+        │   │       ├── security/                      # Security helpers
+        │   │       │   ├── JwtTokenProvider.java
+        │   │       │   ├── JwtAuthFilter.java
+        │   │       │   └── CustomUserDetailsService.java
+        │   │
+        │   │       ├── exception/                     # Error handling
+        │   │       │   ├── GlobalExceptionHandler.java
+        │   │       │   └── ResourceNotFoundException.java
+        │   │
+        │   │       └── util/                           # Utility classes
+        │   │           └── PasswordUtils.java
+        │   │
+        │   └── resources/
+        │       ├── application.properties             # Common configs
+        │       ├── application-dev.properties         # Dev DB configs
+        │       ├── application-prod.properties        # Prod DB configs
+        │       ├── db/
+        │       │   └── migration/                      # Flyway SQL migrations
+        │       │       ├── V1__create_users_table.sql
+        │       │       └── V2__create_pizzas_table.sql
+        │       ├── static/                             # Static web files (optional)
+        │       └── templates/                          # HTML templates (optional)
+        │
+        └── test/java/com/example/pizzaapp/             # Unit & integration tests
+            ├── controller/
+            ├── service/
+            └── security/
