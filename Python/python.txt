@@ -24,3 +24,315 @@
 💡 Best Used For → Data science, AI/ML, scripting, web development (Django, Flask).
 
 KEYWORDS - 
+    1. Control Flow statements
+        if
+        elif
+        else 
+
+        match (Python's equivalent to switch)
+        case 
+
+        for 
+        while
+
+        break 
+        continue
+        pass 
+        return 
+
+        raise (Python’s equivalent to throw)
+        try 
+        except 
+        finally 
+
+    2. Primitive Data Types and operators 
+        Python does not have primitive data types like Java. 
+        Everything is an object, but these are built-in types:
+            int
+            float
+            complex
+            bool
+            str
+            bytes
+            bytearray
+            list
+            tuple
+            set
+            frozenset
+            dict
+            NoneType  (represented by keyword None)
+
+    2.1 Operators - 
+        1. Arithmetic Operators
+            Operator	Description
+            +	        Addition
+            -	        Subtraction
+            *	        Multiplication
+            /	        Division
+            //          Floor Division
+            %	        Modulus (remainder)
+            **          Exponent 
+
+        2. Assignment Operators
+            Operator	Description
+            =	        Assign value
+            +=	        Add and assign
+            -=	        Subtract and assign
+            *=	        Multiply and assign
+            /=	        Divide and assign
+            %=	        Modulus and assign
+            //=         Floor divide and assign
+            **=         Exponent and assign
+            &=	        Bitwise AND and assign
+            `	        =`
+            ^=	        Bitwise XOR and assign
+            <<=	        Left shift and assign
+            >>=	        Right shift and assign
+
+        3. Comparison Operators
+            Operator	Description
+            ==      	Equal to
+            !=      	Not equal to
+            >	        Greater than
+            <	        Less than
+            >=      	Greater than or equal to
+            <=      	Less than or equal to
+            is          Identity comparison
+            is not      Negated identity comparison
+            in          Membership test
+            not in      Negated Membership test 
+
+        4. Logical Operators
+            Operator	Description
+            and	        Logical AND
+            not	        
+            or	        Logical NOT
+
+        5. Bitwise Operators
+            Operator	Description
+            &	        Bitwise AND
+            |	        Bitwise OR 
+            ^	        Bitwise XOR
+            ~	        Bitwise NOT
+            <<	        Left shift
+            >>	        Right shift
+        
+        6. Type Cast (Functions)
+            **  Not keywords, but important
+            int()
+            float()
+            str()
+            bool()
+            list()
+            tuple()
+            set()
+            dict()
+
+        7. Conditional (Ternary) Operator
+            Operator	Description
+            ? :	        Ternary (conditional expression)
+
+        8. Unary Operators
+            Operator	Description
+            +	        Unary plus (positive value)
+            -	        Unary minus (negation)
+            not	        Logical NOT
+            ~	        Bitwise complement
+
+        10. String Concatenation Operator
+            Operator	Description
+            +	        Concatenates strings
+
+        11. Special Operators 
+            .           Member access
+            []          Indexing
+            ()          Function call / tuple
+            ,           Tuple / argument separator
+            :           Slicing / block start / annotations
+            @           Decorator operator
+    3. Object-Oriented Programming (OOP)
+        class
+        def
+        self                (not a keyword but a convention)
+        super()             (function, not keyword)
+        lambda              (anonymous functions)
+        Child               (class Child(Parent): ) // for inheritance and method resolution
+        isinstance()        // type checking
+        issubclass()        // type checking
+        object()            (instantiation)  // creating new object
+
+    4. Exception Handling
+        Python replaces Java’s try–catch with try–except.
+        try
+        except (catch implementation in python)
+        finally
+        raise (used to throw an exception)
+        assert 
+
+    5. Modifiers (Access & Non-Access)
+        ** Python does not have access modifiers — but has conventions.
+        -> Access level conventions - 
+            _public
+            _protected   (single underscore)
+            __private    (double underscore → name mangling)
+
+        -> Important modifiers / related keywords:
+            global          (modify global variable)
+            nonlocal        (modify variable in outer scope)
+            async           (async function)
+            await           (await coroutine)
+
+    6. Modules and Imports 
+        import 
+        from 
+        as
+
+    7. Multithreading, async/concurrency keywords 
+        async 
+        await 
+
+        ** Concurrency libraries: to acheive concurrency 
+            threading
+            multiprocessing
+            asyncio
+
+    8. Python memory management 
+        del       (suggests deletion)
+        None      (null equivalent)
+        id()      (memory identity)
+    
+    9. Debugging and Assertion 
+        assert
+        pass
+
+        ** some other debugging functions - 
+            type()
+            dir()
+            help()
+
+    10. Special Keywords (python 3 onwards )
+        async
+        await
+        match
+        case
+    
+List of Reserved Words (Not Used as Keywords) - These words are reserved for future use but are not currently used as keywords:
+    False      await      else       import     pass
+    None       break      except     in         raise
+    True       class      finally    is         return
+    and        continue   for        lambda     try
+    as         def        from       nonlocal   while
+    assert     del        global     not        with
+    async      elif       if         or         yield
+    match      case
+
+Python reserved literals - 
+    True
+    False
+    None
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Programming fundamentals in PYTHON 
+
+1.1  Basic Data handling
+        Variables and Constants 
+            Storage for data values.
+            // Variables
+                Used to store data values
+                Created dynamically (no type declaration)
+                Type is decided at runtime
+                ex -> price = 99.5
+
+            // Constants 
+                Python does not have true constants.
+                It has Convention-based constants: 
+                ex -> MAX_USERS = 100
+                ** Written in UPPERCASE, Can still be changed (by convention, not enforced)
+
+            // Making FINAL for constants - 
+                one way to acheive constants properties is by making vars FINAL 
+                ex -> from typing import Final
+                      PI: Final = 3.14159
+
+        Variable Scoping in Python
+            Python follows the LEGB rule: 
+                Local → Enclosing → Global → Built-in
+
+                1. LOCAL variable 
+                    Variables defined inside a function
+                    Accessible only within that function
+
+                2. ENCLOSING variable 
+                    Variables in an outer function, accessible to inner functions
+                
+                3. GLOBAL variable 
+                    Variables defined outside all functions.
+                    Readable inside functions.
+                
+                4. BUILT IN variables 
+                    Python’s predefined names - ex len, size etc.
+
+        Data Types 
+            Python does not distinguish primitive vs non-primitive like Java.
+            Everything is an object.
+
+            🔹 Built-in Types (non collection)
+                Type	            Description
+                int	                Integer numbers
+                float	            Decimal numbers
+                complex	            Complex numbers
+                bool	            Boolean values (True, False)
+                str	                Characters & strings (no separate char)
+
+            🔹 Complex / Collection Data Types
+                list	            Dynamic array
+                tuple	            Immutable list
+                set	                Unordered unique collection
+                dict	            Key-value map
+                bytes	            Immutable byte array
+                bytearray	        Mutable byte array
+
+            🔹 User defined types - 
+                class
+            
+        Type System 
+            Python is dynamically typed language.
+                Variable type is decided at runtime
+                No need to define the variable's data type, it is inferred at runtime
+                Same variable can reference different types
+
+            Python is also strongly typed language
+                Once a variable is declared to be of a certain type, it cannot be used as another type without an explicit conversion (casting).
+                Python does NOT allow implicit unsafe conversions
+
+        Type Conversion 
+            Implicit Type conversion - 
+                Also known as automatic type conversion, it happens when:
+                    A type is converted into some other type automatically.
+                    Python converts types only when safe.
+                    for ex float to int is safe, bt not str to int.
+            
+            Explicit Type Conversion (Typecasting()) 
+                Also called type casting, you do it manually when:
+                    A type is converted into a not safe other type.
+                    Requires a cast operator: (type)
+                    for ex str(100) -> # "100"
+
+                some casting function - 
+                    int()
+                    float()
+                    str()
+                    bool()
+                    list()
+                    tuple()
+                    set()
+                    dict()
+
+2.  Control Flow
+        Conditionals 
+            if, else, switch statements.
+        Loops 
+            for, while, do-while.
+        Jump Statements 
+            break, continue, goto (in some languages), return.
