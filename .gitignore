@@ -1,0 +1,4 @@
+# To ignore all executables generated after c++ compilation step
+PracticeProgramsExecutables
+# To ignore all generated class files of java programs
+*.class
