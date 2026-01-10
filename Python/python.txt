@@ -330,9 +330,48 @@ Programming fundamentals in PYTHON
                     dict()
 
 2.  Control Flow
-        Conditionals 
+        Conditionals - Used to make decisions based on conditions.
             if, else, switch statements.
+            ** Python uses indentation instead of {}, 
+            ** Keywords - if, elif, else
+                if condition:
+                    # if block
+                elif condition:
+                    # else if block
+                else:
+                    # else block
+
+            ** Python has match in place of switch 
+            ** _ acts like default, so if we place _ after a case that becomes a default case.
+                match comparator_value:
+                    case val1:
+                        # block for this case
+                    case val2:
+                        # another case
+                    case _:
+                        # default case (matches anything)
+
         Loops 
-            for, while, do-while.
+            for, while, do-while (python does not have do while loops).
+                ** for loop using iterator -
+                ** Used when number of iterations is known.
+                ** Iterates over sequences (list, tuple, string, range, etc.).
+                    for item in iterable:
+                        # loop block
+
+                ** for loop using range - 
+                    for i in range(1, 6):
+                        print(i)
+
+                ** while loops - 
+                ** Used when number of iterations is unknown.
+                    while condition:
+                        # loop block
+                ** no do-while loop in python.
+
         Jump Statements 
             break, continue, goto (in some languages), return.
+            break - Exits the loop or switch immediately.
+            continue - Skips the current iteration and continues the loop.
+            return - Exits from the current method and optionally returns a value.
+            goto  - python does not support goto.

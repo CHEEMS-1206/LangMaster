@@ -390,7 +390,7 @@ Programming fundamentals in java
             ex - functionName(args // if params are defined)
             
         Function Parameters and Return Types 
-            Parameters	Input values sent to a method
+            Parameters	Input values received in a method
             Return Type	Output type returned by a method
             void	    No return value
             Arguments   Values sent when calling function to replace params
